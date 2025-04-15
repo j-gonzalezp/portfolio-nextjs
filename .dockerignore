@@ -1,0 +1,24 @@
+# Archivos de configuración y Git
+.dockerignore
+.git
+.gitignore
+Dockerfile
+README.md
+.env*
+!.env.production.local
+
+# Dependencias y caché
+node_modules
+.yarn/cache
+.yarn/install-state.gz
+.yarn/patches
+.pnp.*
+
+# Archivos de build intermedios y logs de Next.js
+.next
+*.log
+
+# Otros
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

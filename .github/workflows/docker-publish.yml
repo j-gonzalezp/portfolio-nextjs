@@ -1,0 +1,49 @@
+# .github/workflows/docker-publish.yml
+name: Docker Build and Publish
+
+on:
+  push:
+    branches: ["main"] # Ejecutar cuando se haga push a la rama main
+  # Opcional: Ejecutar manualmente desde la pestaña Actions
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write # Necesario para pushear a ghcr.io
+
+jobs:
+  build-and-push-docker-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }} # Token automático con permisos
+
+      - name: Extract Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }} # Ajusta si quieres otro nombre de imagen
+          tags: |
+            type=sha,prefix= # Etiqueta con el hash corto del commit
+            type=raw,value=latest,enable={{is_default_branch}} # Etiqueta 'latest' solo para la rama por defecto (main)
+
+      - name: Build and push Docker image
+        id: build-and-push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha # Habilitar caché de GitHub Actions
+          cache-to: type=gha,mode=max # Guardar caché
+
+      - name: Image digest
+        run: echo ${{ steps.build-and-push.outputs.digest }}
