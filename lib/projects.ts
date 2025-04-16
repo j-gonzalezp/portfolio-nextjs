@@ -129,7 +129,7 @@ const placeholderProjects: RawProjectData[] = [
             "Healthcare",
             "API Integration"
         ],
-        "imageUrl": "images/projects/hospital.png",
+        "imageUrl": "images/hospital.png",
         "isAcademic": false,
         "isFeatured": true,
         "content_es": "<p>Desarrollo completo de una aplicación web para un hospital moderno usando Next.js 15 (App Router), TypeScript y Tailwind CSS. Incluye autenticación de usuarios, búsqueda de doctores/servicios y un sistema clave de <strong>reservas de citas basado en slots de disponibilidad</strong> gestionados con un backend <strong>Appwrite</strong>.</p><p>Se implementó un enfoque \"Backend First\", definiendo la estructura de datos y lógica de Appwrite (incluyendo colecciones para doctores, citas, y slots de disponibilidad) antes de construir el frontend. Se utilizaron Server Components para fetching de datos y Server Actions para mutaciones.</p><p>La aplicación fue <strong>dockerizada</strong> para un despliegue consistente y se configuró <strong>CI/CD</strong> (inicialmente con Render, adaptable a Vercel o similar) para automatizar el proceso.</p><p><strong>Características Destacadas:</strong> Programación de citas por slot, perfiles de doctores, listado de servicios, artículos de salud, autenticación, diseño responsive con tema claro/oscuro.</p>",
