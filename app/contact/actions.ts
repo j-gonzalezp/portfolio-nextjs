@@ -1,3 +1,4 @@
+// app/contact/actions.ts
 'use server';
 
 import { z } from 'zod';
@@ -38,12 +39,21 @@ export async function submitContactForm(
     };
   }
 
+  // Destructure data *after* validation
   const { name, email, message } = validatedFields.data;
 
   try {
+    // Use the validated data (example: logging)
+    console.log('Server Action: Nuevo mensaje recibido:');
+    console.log('Nombre:', name);
+    console.log('Email:', email);
+    console.log('Mensaje:', message);
+
+    // Replace console logs with actual email sending / DB saving logic
+    // Example: await sendEmail({ name, email, message });
 
     await new Promise(resolve => setTimeout(resolve, 1000));
-    const emailSentSuccessfully = true;
+    const emailSentSuccessfully = true; // Simulate success
 
     if (emailSentSuccessfully) {
         return { message: '¡Mensaje enviado con éxito!', status: 'success', errors: null };

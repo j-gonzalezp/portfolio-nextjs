@@ -1,9 +1,12 @@
+// app/contact/page.tsx
 'use client';
 import ContactForm from '../components/ui/ContactForm';
-import Link from 'next/link';
+// Link import is not needed if only used within ContactForm
+// import Link from 'next/link';
 import { useLocale } from '@/app/contexts/LocaleContext';
 import { translations } from '@/lib/translations';
-import { GITHUB_PROFILE_URL, LINKEDIN_PROFILE_URL, PHONE_NUMBER_HREF, EMAIL_ADDRESS_HREF, PHONE_NUMBER, EMAIL_ADDRESS } from '@/lib/constants';
+// PHONE_NUMBER and EMAIL_ADDRESS removed as they were unused
+import { GITHUB_PROFILE_URL, LINKEDIN_PROFILE_URL, PHONE_NUMBER_HREF, EMAIL_ADDRESS_HREF } from '@/lib/constants';
 import { Mail, Phone, Github, Linkedin } from 'lucide-react';
 import SectionTitle from '@/app/components/layout/SectionTitle';
 

@@ -1,3 +1,4 @@
+// app/projects/[slug]/ProjectDetailClient.tsx
 'use client';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
@@ -30,7 +31,7 @@ export default function ProjectDetailClient({ initialProjectData }: ProjectDetai
   useEffect(() => {
     const detectLocaleFromData = (data: ProjectData): Locale | null => {
       if (!data?.title) return null;
-      return data.title.includes('Aplicación') ? 'es' : 'en';
+      return data.title.includes('Aplicación') || data.summary.includes('Aplicación') ? 'es' : 'en';
     }
 
     const fetchAndSetProjectData = async (slug: string, newLocale: Locale) => {
@@ -49,45 +50,45 @@ export default function ProjectDetailClient({ initialProjectData }: ProjectDetai
         }
     };
 
-    const initialLocaleDetected = initialProjectData ? detectLocaleFromData(initialProjectData) : null;
     const currentLocaleDetected = project ? detectLocaleFromData(project) : null;
 
-    if (!initialProjectData || initialProjectData.slug !== project?.slug || locale === initialLocaleDetected) {
-         if (project && locale !== currentLocaleDetected) {
-              if (initialProjectData && locale === initialLocaleDetected) {
-                  setProject(initialProjectData);
-                  setErrorLoadingLocale(null);
-              } else {
-                   if (project.slug && !isLoadingLocale) {
-                      fetchAndSetProjectData(project.slug, locale);
-                   }
-              }
-         } else if (!project && initialProjectData) {
-             setProject(initialProjectData);
-         }
-        return;
+    if(locale === currentLocaleDetected) {
+        // If locale matches current data, clear any previous loading error
+        if (errorLoadingLocale) setErrorLoadingLocale(null);
+        return; // No need to do anything else
     }
 
+    // Locale has changed AND is different from current data's locale
     if (project?.slug && !isLoadingLocale) {
+        // Attempt to fetch data for the new locale
         fetchAndSetProjectData(project.slug, locale);
     }
 
-  }, [locale, initialProjectData, project?.slug, isLoadingLocale]);
+    // This part handles setting initial state correctly on first render or if initialData changes
+    // But only if it's different from the current project slug to avoid unnecessary updates
+    if (initialProjectData && project?.slug !== initialProjectData.slug) {
+       setProject(initialProjectData);
+       // Reset error when receiving completely new initial data for a different project
+       setErrorLoadingLocale(null);
+    }
+
+  // Add 'errorLoadingLocale' to the dependency array
+  }, [locale, initialProjectData, project, isLoadingLocale, errorLoadingLocale]); // <--- AÑADIDO AQUÍ
 
   const currentDict = translations[locale];
 
-  if (isLoadingLocale && !project) {
-      return <div className="flex flex-col items-center justify-center min-h-[400px] text-[var(--text-subtle)]"><LoadingSpinner /><p className="mt-4">Cargando idioma...</p></div>;
-  }
-
-  if (!project) {
+  if (!project && !isLoadingLocale) {
       return <div className="text-center py-20 text-[var(--text-error)] font-semibold flex flex-col items-center gap-3"><AlertTriangle size={32}/>Error: Datos del proyecto no disponibles.</div>;
   }
+    if (!project && isLoadingLocale) {
+     return <div className="flex flex-col items-center justify-center min-h-[400px] text-[var(--text-subtle)]"><LoadingSpinner /><p className="mt-4">Cargando proyecto...</p></div>;
+  }
+  if (!project) return null;
 
   const { title, summary, tags, content, repoUrl, liveUrl, imageUrl, currentFocus, localizedChangelog, stories, isAcademic } = project;
 
   return (
-    <article className="max-w-4xl mx-auto">
+    <article className="max-w-4xl mx-auto relative">
        {isLoadingLocale && (
            <div className="absolute top-4 right-4 z-10 bg-[var(--bg-subtle)] text-[var(--text-subtle)] p-2 rounded-md shadow-md text-xs flex items-center gap-2 animate-pulse">
                <LoadingSpinner /> Cargando {locale === 'es' ? 'Español' : 'English'}...

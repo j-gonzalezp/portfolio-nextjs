@@ -3,7 +3,6 @@ import ProjectCard from '@/app/components/projects/ProjectCard';
 import { getAllProjectMetadata } from '@/lib/projects';
 import { translations } from '@/lib/translations';
 import type { ProjectMetadata } from '@/lib/projects';
-import LoadingSpinner from '@/app/components/ui/LoadingSpinner';
 
 async function ProjectLists({ locale }: { locale: 'es' | 'en' }) {
     let allProjects: ProjectMetadata[] = [];

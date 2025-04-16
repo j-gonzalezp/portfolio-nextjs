@@ -1,0 +1,95 @@
+# Proyecto: Aplicación Web Moderna para Hospital (Next.js 15 & Appwrite)
+
+## Resumen
+
+Aplicación web completa, responsive y contenerizada desarrollada para un hospital privado moderno. Centrada en el paciente, muestra servicios, personal médico, recursos y facilita la interacción del usuario, destacando un sistema robusto de **programación de citas basado en disponibilidad de slots**. Construida con **Next.js 15 (App Router)**, TypeScript, Tailwind CSS y un backend **Appwrite** (Cloud o Self-hosted) diseñado bajo un enfoque "Backend First". El proyecto incluye containerización con **Docker** y despliegue continuo (CI/CD) en **Render**.
+
+## Objetivos Principales
+
+*   Desarrollar una interfaz de usuario moderna, intuitiva y completamente responsive.
+*   Proveer información detallada sobre servicios médicos, especialidades y personal médico.
+*   Implementar un sistema de **programación y cancelación de citas** eficiente y fiable, basado en la disponibilidad real de los doctores gestionada mediante slots específicos.
+*   Ofrecer un centro de recursos para pacientes y visitantes (artículos de salud, información práctica).
+*   Asegurar un alto rendimiento y una experiencia de usuario fluida usando las últimas características de Next.js (Server Components, etc.).
+*   Contenerizar la aplicación para un despliegue consistente y escalable.
+*   Establecer un pipeline de CI/CD para automatizar los despliegues en Render.
+
+## Stack Tecnológico
+
+*   **Framework Frontend:** Next.js 15 (App Router) con TypeScript
+*   **Estilos:** Tailwind CSS (configuración por defecto, sin `tailwind.config.js`, usando `globals.css` y variables CSS)
+*   **Gestión de Estado (Frontend):** React Hooks (`useState`, `useEffect`, `useContext`), Server Components, Server Actions
+*   **Backend y Base de Datos:** Appwrite (Cloud o Self-hosted)
+*   **Contenerización:** Docker
+*   **Despliegue:** Render
+*   **CI/CD:** Integración Git de Render (o GitHub Actions si se prefiere)
+*   **Control de Versiones:** Git y GitHub (o similar)
+*   **(Opcional/Básico)** PWA: Manifest, Service Worker básico
+
+## Características Clave
+
+*   **Homepage:** Presentación atractiva con secciones destacadas (Servicios, Doctores, Testimonios).
+*   **Buscador de Doctores:** Filtro por nombre y especialidad, perfiles detallados de doctores.
+*   **Servicios y Especialidades:** Listado y páginas de detalle para cada servicio/especialidad ofrecida.
+*   **Sistema de Citas:**
+    *   Visualización de slots de disponibilidad por doctor y fecha.
+    *   Reserva de citas seleccionando un slot disponible.
+    *   Dashboard "Mis Citas" para pacientes registrados.
+    *   Funcionalidad para cancelar citas (liberando el slot correspondiente).
+*   **Recursos de Salud:** Listado y vista detallada de artículos informativos.
+*   **Ubicaciones:** Información de contacto y mapas para las diferentes sedes.
+*   **Autenticación de Usuarios:** Registro e inicio de sesión para pacientes.
+*   **Páginas Informativas:** "About Us", "Contact Us" (con formulario), "Patients & Visitors Hub".
+*   **Diseño Responsive:** Adaptable a todos los tamaños de pantalla.
+*   **Tema Claro/Oscuro:** Soporte básico mediante variables CSS y la clase `dark`.
+
+## Detalles Técnicos y Arquitectura
+
+### Frontend (Next.js 15)
+
+Se utilizó el **App Router** de Next.js 15, aprovechando los **Server Components** para la obtención inicial de datos (fetching) directamente en el servidor, mejorando el rendimiento y reduciendo el JavaScript enviado al cliente. Los componentes interactivos (formularios, menús, selectores de slots) se implementaron como **Client Components** (`'use client';`) utilizando React Hooks.
+
+El estilo se manejó exclusivamente con **Tailwind CSS** mediante clases de utilidad directamente en el JSX. No se utilizó `tailwind.config.js`; en su lugar, se definieron variables CSS en `:root` y `html.dark` dentro de `src/app/globals.css` para la paleta de colores, tipografía (usando `@theme` para variables `--font-sans` y `--font-serif` con `next/font/google`) y otros elementos base del tema.
+
+Las mutaciones de datos (login, registro, reserva/cancelación de citas, envío de formulario de contacto) se implementaron principalmente usando **Server Actions**, manteniendo la lógica de interacción con el backend fuera del cliente siempre que fue posible.
+
+### Backend (Appwrite) y Lógica de Citas
+
+Se adoptó un enfoque **"Backend First"**, definiendo y configurando completamente la estructura de Appwrite antes de construir el frontend.
+
+*   **Colecciones Principales:** `users` (Auth), `doctors`, `specialties`, `services`, `appointments`, `locations`, `articles`, `testimonials`, `patientInfo`.
+*   **Lógica de Disponibilidad y Citas (Crucial):**
+    *   Se creó una colección dedicada `doctorAvailabilitySlots` con atributos: `doctorId`, `startTime` (DateTime), `endTime` (DateTime), `status` (Enum: 'available', 'booked', 'unavailable'), `appointmentId` (String nullable, FK a `appointments`).
+    *   **Reserva:**
+        1. El frontend consulta `doctorAvailabilitySlots` filtrando por `doctorId`, rango de `startTime` (para una fecha) y `status: 'available'`. Índices adecuados en Appwrite son esenciales aquí.
+        2. Al seleccionar un slot, la Server Action `createAppointment` verifica que el slot siga 'available'.
+        3. Se crea el documento en la colección `appointments` (`patientId`, `doctorId`, `availabilitySlotId`, `status: 'scheduled'`).
+        4. Se actualiza el documento del `doctorAvailabilitySlots` a `status: 'booked'` y se enlaza el `$id` de la cita recién creada en `appointmentId`. (Se mencionó el riesgo mínimo de concurrencia y la recomendación de usar Appwrite Functions para atomicidad total).
+    *   **Cancelación:**
+        1. La Server Action `cancelUserAppointment` actualiza el `status` de la cita en `appointments` a `'cancelled'`.
+        2. Busca el `doctorAvailabilitySlots` asociado usando `availabilitySlotId`.
+        3. Actualiza el `status` del slot a `'available'` y `appointmentId` a `null`.
+
+### Contenerización (Docker)
+
+Se creó un `Dockerfile` multi-stage optimizado:
+1.  **Etapa de Build:** Instala dependencias (`npm ci`) y construye la aplicación Next.js (`npm run build`) habilitando la salida `standalone` en `next.config.mjs`.
+2.  **Etapa de Producción:** Usa una imagen base ligera (`node:20-alpine`), copia solo los artefactos necesarios (`public`, `.next/standalone`, `.next/static`) desde la etapa de build, crea un usuario no-root (`nextjs`) y ejecuta la aplicación con `node server.js`.
+3.  Se utilizó un archivo `.dockerignore` para minimizar el contexto de build.
+
+### CI/CD (Render)
+
+*   El código se alojó en un repositorio Git (GitHub/GitLab/Bitbucket).
+*   Se creó un servicio web en Render configurado para usar **Docker**.
+*   Se conectó el repositorio Git al servicio de Render.
+*   Se configuraron las **variables de entorno** necesarias (`NEXT_PUBLIC_...` para Appwrite) directamente en la interfaz de Render.
+*   Se habilitó **Auto-Deploy** en Render, lo que dispara un nuevo build y despliegue automáticamente en cada `push` a la rama principal (`main`).
+
+## Resultado
+
+El proyecto culminó con una aplicación web funcional, moderna y desplegada, cumpliendo todos los objetivos iniciales. La aplicación proporciona una interfaz clara para los pacientes y visitantes, con un sistema de gestión de citas funcional basado en la disponibilidad real gestionada en Appwrite. La contenerización y el CI/CD aseguran un proceso de despliegue robusto y automatizado.
+
+## Enlaces
+
+*   **Demo en Vivo (Render):** `[URL_DEMO_RENDER]`
+*   **Repositorio (GitHub):** `[URL_REPOSITORIO_GITHUB]`

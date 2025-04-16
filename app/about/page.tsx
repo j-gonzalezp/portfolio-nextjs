@@ -1,13 +1,12 @@
 'use client';
 import React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useLocale } from '@/app/contexts/LocaleContext';
 import { translations } from '@/lib/translations';
 import { GITHUB_PROFILE_URL, LINKEDIN_PROFILE_URL, PHONE_NUMBER_HREF, PHONE_NUMBER } from '@/lib/constants';
 import SkillsCard, { TechnicalSkillItem } from '@/app/components/features/about/SkillsCard';
 import SectionTitle from '@/app/components/layout/SectionTitle';
-import { Mail, Phone, Linkedin, Github, FileText, GraduationCap, Briefcase, Languages } from 'lucide-react';
+import { Mail, Phone, Linkedin, Github, GraduationCap, Briefcase, Languages } from 'lucide-react';
 
 interface ExperienceItem { title: string; place: string; years: string; }
 interface EducationItem { title: string; place: string; years: string; }

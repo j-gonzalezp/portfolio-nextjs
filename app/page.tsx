@@ -1,3 +1,4 @@
+// app/page.tsx
 import Link from 'next/link';
 import React, { Suspense } from 'react';
 import ProjectCard from './components/projects/ProjectCard';
@@ -5,7 +6,8 @@ import Button from './components/ui/Button';
 import { getFeaturedProjects } from '@/lib/projects';
 import { translations } from '@/lib/translations';
 import type { ProjectMetadata } from '@/lib/projects';
-import LoadingSpinner from './components/ui/LoadingSpinner';
+// LoadingSpinner removed as it's unused
+// import LoadingSpinner from './components/ui/LoadingSpinner';
 import { AlertCircle, Info } from 'lucide-react';
 
 async function FeaturedProjectsList({ locale }: { locale: 'es' | 'en' }) {
@@ -14,7 +16,6 @@ async function FeaturedProjectsList({ locale }: { locale: 'es' | 'en' }) {
 
     try {
         featuredProjects = await getFeaturedProjects(locale);
-        await new Promise(resolve => setTimeout(resolve, 500));
     } catch (error) {
         console.error("Failed to fetch featured projects on server:", error);
         errorFetching = true;

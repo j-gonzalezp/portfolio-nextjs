@@ -1,12 +1,15 @@
+// app/components/projects/ProjectCard.tsx
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import TechTag from './TechTag';
-import { cn } from '@/lib/utils';
-import type { ProjectMetadata } from '@/lib/projects';
+
+import type { ProjectMetadata } from '@/lib/projects'; // Directly use ProjectMetadata
 import { ArrowUpRight, Image as ImageIcon } from 'lucide-react';
 
-interface ProjectCardProps extends ProjectMetadata {}
+// Use ProjectMetadata directly as props type
+// No empty interface needed
+// interface ProjectCardProps extends ProjectMetadata {}
 
 export default function ProjectCard({
     slug,
@@ -14,9 +17,9 @@ export default function ProjectCard({
     summary,
     tags,
     imageUrl,
-    isFeatured,
+    // isFeatured, // Removed as it's unused
     isAcademic,
-}: ProjectCardProps) {
+}: ProjectMetadata) { // Use ProjectMetadata directly
     const linkHref = `/projects/${slug}`;
 
     return (
