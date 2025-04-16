@@ -3,13 +3,12 @@ name: Docker Build and Publish
 
 on:
   push:
-    branches: ["main"] # Ejecutar cuando se haga push a la rama main
-  # Opcional: Ejecutar manualmente desde la pestaña Actions
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
   contents: read
-  packages: write # Necesario para pushear a ghcr.io
+  packages: write
 
 jobs:
   build-and-push-docker-image:
@@ -18,21 +17,29 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # --------> AÑADIR ESTOS PASOS <--------
+      - name: Set up QEMU # Necesario para buildx en diferentes arquitecturas (opcional pero buena práctica)
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx # Configura un builder compatible con caché
+        uses: docker/setup-buildx-action@v3
+      # --------> FIN DE PASOS AÑADIDOS <--------
+
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }} # Token automático con permisos
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Extract Docker metadata
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }} # Ajusta si quieres otro nombre de imagen
+          images: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}
           tags: |
-            type=sha,prefix= # Etiqueta con el hash corto del commit
-            type=raw,value=latest,enable={{is_default_branch}} # Etiqueta 'latest' solo para la rama por defecto (main)
+            type=sha,prefix=
+            type=raw,value=latest,enable={{is_default_branch}}
 
       - name: Build and push Docker image
         id: build-and-push
@@ -42,8 +49,8 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha # Habilitar caché de GitHub Actions
-          cache-to: type=gha,mode=max # Guardar caché
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       - name: Image digest
         run: echo ${{ steps.build-and-push.outputs.digest }}
