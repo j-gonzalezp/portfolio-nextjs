@@ -1,15 +1,18 @@
 // app/components/projects/ProjectCard.tsx
+'use client'; // <-- MOVIDO AL INICIO DEL ARCHIVO
+
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import TechTag from './TechTag';
+// import { cn } from '@/lib/utils'; // <--- Eliminado porque no se usa
+import type { ProjectMetadata } from '@/lib/projects';
+import { ArrowUpRight, Image as ImageIcon, Star } from 'lucide-react'; // <-- Añadido Star
+import { useLocale } from '@/app/contexts/LocaleContext';
+import { translations } from '@/lib/translations';
 
-import type { ProjectMetadata } from '@/lib/projects'; // Directly use ProjectMetadata
-import { ArrowUpRight, Image as ImageIcon } from 'lucide-react';
-
-// Use ProjectMetadata directly as props type
-// No empty interface needed
-// interface ProjectCardProps extends ProjectMetadata {}
+// Usar directamente el tipo ProjectMetadata en lugar de la interfaz vacía
+// interface ProjectCardProps extends ProjectMetadata {} <--- Eliminado
 
 export default function ProjectCard({
     slug,
@@ -17,18 +20,36 @@ export default function ProjectCard({
     summary,
     tags,
     imageUrl,
-    // isFeatured, // Removed as it's unused
+    isFeatured, // <-- Ahora se usará
     isAcademic,
-}: ProjectMetadata) { // Use ProjectMetadata directly
+}: ProjectMetadata) { // <-- Usar ProjectMetadata directamente aquí
     const linkHref = `/projects/${slug}`;
+    const { locale } = useLocale();
+    const dict = translations[locale];
+
+    const MAX_TAGS_VISIBLE = 4;
+    const tagsToShow = tags?.slice(0, MAX_TAGS_VISIBLE);
+    const remainingTagsCount = tags ? tags.length - MAX_TAGS_VISIBLE : 0;
 
     return (
+        // Añadido 'relative' para posicionar el badge de 'isFeatured'
         <article className="group relative flex flex-col overflow-hidden rounded-lg border border-[var(--border-primary)] bg-[var(--bg-subtle)] shadow-[var(--shadow)] transition-all duration-300 ease-in-out hover:shadow-[var(--shadow-lg)] hover:-translate-y-1 focus-within:shadow-[var(--shadow-lg)] focus-within:-translate-y-1">
+             {/* Añadir badge si es Featured */}
+             {isFeatured && (
+                 <span
+                     className="absolute top-2 right-2 z-10 flex items-center gap-1 rounded-full bg-amber-400 px-2 py-0.5 text-xs font-bold text-amber-900 shadow-sm"
+                     title={locale === 'es' ? 'Proyecto Destacado' : 'Featured Project'} // Añadir title para accesibilidad
+                 >
+                     <Star size={12} fill="currentColor" />
+                     {locale === 'es' ? 'Destacado' : 'Featured'}
+                 </span>
+             )}
+
              <div className="aspect-video overflow-hidden relative bg-[var(--bg-skeleton)]">
                 {imageUrl ? (
                     <Image
                         src={imageUrl}
-                        alt={`Vista previa de ${title}`}
+                        alt={`${dict.projectImageAltPrefix} ${title}`}
                         fill
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         className="object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
@@ -43,7 +64,7 @@ export default function ProjectCard({
             <div className="flex flex-col flex-grow p-5 md:p-6">
                  {isAcademic && (
                     <p className="mb-2 text-xs font-medium text-[var(--color-academic-badge-text)] bg-[var(--color-academic-badge-bg)] px-2 py-0.5 rounded-full self-start border border-[var(--color-academic-border)]">
-                        Aprendizaje
+                        {dict.projectLearningBadge}
                     </p>
                  )}
                 <h3 className="mb-2 font-semibold text-lg md:text-xl leading-snug text-[var(--text-primary)]">
@@ -57,11 +78,15 @@ export default function ProjectCard({
                     {summary}
                 </p>
                 {tags && tags.length > 0 && (
-                    <div className="mt-auto flex flex-wrap gap-2 pt-3 border-t border-[var(--border-secondary)]">
-                        {tags.slice(0, 4).map((tag) => (
+                    <div className="mt-auto flex flex-wrap gap-2 pt-3 border-t border-[var(--border-secondary)] items-center">
+                        {tagsToShow?.map((tag) => (
                             <TechTag key={tag} name={tag} />
                         ))}
-                        {tags.length > 4 && <span className='text-xs text-[var(--text-subtle)] pt-1'>+ {tags.length - 4}</span>}
+                        {remainingTagsCount > 0 && (
+                             <span className='text-xs text-[var(--text-subtle)] pt-0.5'>
+                                 {dict.projectMoreTags.replace('{count}', remainingTagsCount.toString())}
+                             </span>
+                         )}
                     </div>
                 )}
             </div>

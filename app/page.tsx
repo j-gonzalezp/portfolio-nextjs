@@ -1,54 +1,17 @@
 // app/page.tsx
+'use client';
+
 import Link from 'next/link';
-import React, { Suspense } from 'react';
+import React, {  useEffect, useState } from 'react';
 import ProjectCard from './components/projects/ProjectCard';
 import Button from './components/ui/Button';
 import { getFeaturedProjects } from '@/lib/projects';
 import { translations } from '@/lib/translations';
 import type { ProjectMetadata } from '@/lib/projects';
-// LoadingSpinner removed as it's unused
-// import LoadingSpinner from './components/ui/LoadingSpinner';
 import { AlertCircle, Info } from 'lucide-react';
+import { useLocale } from './contexts/LocaleContext';
 
-async function FeaturedProjectsList({ locale }: { locale: 'es' | 'en' }) {
-    let featuredProjects: ProjectMetadata[] = [];
-    let errorFetching = false;
-
-    try {
-        featuredProjects = await getFeaturedProjects(locale);
-    } catch (error) {
-        console.error("Failed to fetch featured projects on server:", error);
-        errorFetching = true;
-    }
-
-    if (errorFetching) {
-        return (
-            <div className="flex flex-col items-center text-center py-8 px-4 text-[var(--text-error)]">
-                 <AlertCircle size={40} className="mb-3 opacity-80" />
-                 <p className="font-semibold">Error al cargar los proyectos destacados.</p>
-                 <p className="text-sm">Intenta refrescar la página.</p>
-            </div>
-        );
-    }
-
-    if (featuredProjects.length === 0) {
-         return (
-             <div className="flex flex-col items-center text-center py-8 px-4 text-[var(--text-subtle)]">
-                 <Info size={40} className="mb-3 opacity-70" />
-                 <p>Pronto mostraré mis proyectos destacados aquí.</p>
-             </div>
-         );
-    }
-
-    return (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl w-full">
-            {featuredProjects.map((project) => (
-                <ProjectCard key={project.slug} {...project} />
-            ))}
-        </div>
-    );
-}
-
+// --- Helper Component definido FUERA de Home ---
 function ProjectsLoadingSkeleton() {
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl w-full animate-pulse">
@@ -69,11 +32,33 @@ function ProjectsLoadingSkeleton() {
         </div>
     );
 }
+// --- Fin Helper Component ---
 
+export default function Home() {
+  const { locale } = useLocale();
+  const dict = translations[locale];
 
-export default async function Home() {
-  const serverLocale = 'es';
-  const dict = translations[serverLocale];
+  const [featuredProjects, setFeaturedProjects] = useState<ProjectMetadata[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [errorFetching, setErrorFetching] = useState(false);
+
+  useEffect(() => {
+       const fetchProjects = async () => {
+           setIsLoading(true);
+           setErrorFetching(false);
+           try {
+                const projects = await getFeaturedProjects(locale);
+                setFeaturedProjects(projects);
+           } catch (error) {
+                console.error("Failed to fetch featured projects (client):", error);
+                setErrorFetching(true);
+           } finally {
+                setIsLoading(false);
+           }
+       };
+       fetchProjects();
+   }, [locale]);
+
 
   return (
     <section className="text-center flex flex-col items-center py-16 md:py-24">
@@ -93,10 +78,25 @@ export default async function Home() {
 
       <h2 className="font-semibold mb-10 text-[var(--text-primary)]">{dict.homeFeaturedProjects}</h2>
 
-      <Suspense fallback={<ProjectsLoadingSkeleton />}>
-        <FeaturedProjectsList locale={serverLocale} />
-      </Suspense>
-
+      {isLoading ? (
+          <ProjectsLoadingSkeleton /> // Ahora usa el componente definido fuera
+      ) : errorFetching ? (
+           <div className="flex flex-col items-center text-center py-8 px-4 text-[var(--text-error)]">
+                 <AlertCircle size={40} className="mb-3 opacity-80" />
+                 <p className="font-semibold">Error al cargar los proyectos destacados.</p>
+           </div>
+      ) : featuredProjects.length === 0 ? (
+            <div className="flex flex-col items-center text-center py-8 px-4 text-[var(--text-subtle)]">
+                 <Info size={40} className="mb-3 opacity-70" />
+                 <p>Pronto mostraré mis proyectos destacados aquí.</p>
+            </div>
+      ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl w-full">
+            {featuredProjects.map((project) => (
+              <ProjectCard key={project.slug} {...project} />
+            ))}
+          </div>
+      )}
     </section>
   );
 }
