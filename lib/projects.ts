@@ -129,13 +129,13 @@ const placeholderProjects: RawProjectData[] = [
             "Healthcare",
             "API Integration"
         ],
-        "imageUrl": "public/images/projects/hospital.png",
+        "imageUrl": "images/projects/hospital.png",
         "isAcademic": false,
         "isFeatured": true,
         "content_es": "<p>Desarrollo completo de una aplicación web para un hospital moderno usando Next.js 15 (App Router), TypeScript y Tailwind CSS. Incluye autenticación de usuarios, búsqueda de doctores/servicios y un sistema clave de <strong>reservas de citas basado en slots de disponibilidad</strong> gestionados con un backend <strong>Appwrite</strong>.</p><p>Se implementó un enfoque \"Backend First\", definiendo la estructura de datos y lógica de Appwrite (incluyendo colecciones para doctores, citas, y slots de disponibilidad) antes de construir el frontend. Se utilizaron Server Components para fetching de datos y Server Actions para mutaciones.</p><p>La aplicación fue <strong>dockerizada</strong> para un despliegue consistente y se configuró <strong>CI/CD</strong> (inicialmente con Render, adaptable a Vercel o similar) para automatizar el proceso.</p><p><strong>Características Destacadas:</strong> Programación de citas por slot, perfiles de doctores, listado de servicios, artículos de salud, autenticación, diseño responsive con tema claro/oscuro.</p>",
         "content_en": "<p>Full-stack development of a modern hospital web application using Next.js 15 (App Router), TypeScript, and Tailwind CSS. Features user authentication, doctor/service browsing, and a key <strong>slot-based appointment scheduling system</strong> managed by an <strong>Appwrite</strong> backend.</p><p>A \"Backend First\" approach was implemented, defining the Appwrite data structure and logic (including collections for doctors, appointments, and availability slots) before building the frontend. Server Components were used for data fetching and Server Actions for mutations.</p><p>The application was <strong>dockerized</strong> for consistent deployment and <strong>CI/CD</strong> was configured (initially targeting Render, adaptable to Vercel or similar) to automate the process.</p><p><strong>Key Features:</strong> Slot-based appointment booking, doctor profiles, service listings, health articles, authentication, responsive design with light/dark theme.</p>",
         "repoUrl": "https://github.com/j-gonzalezp/hospital_app_final",
-        "liveUrl": "https://hospital-app-final-1.onrender.com/"
+        "liveUrl": "https://hospital-app-final.vercel.app/"
     },
     {
         slug: 'portfolio-nextjs-app',
@@ -157,7 +157,7 @@ const placeholderProjects: RawProjectData[] = [
             'Accessibility',
             'Responsive Design',
         ],
-        imageUrl: 'public/images/portfolio.png',
+        imageUrl: 'images/portfolio.png',
         isAcademic: false,
         isFeatured: true,
         content_es: `
