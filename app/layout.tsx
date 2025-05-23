@@ -21,15 +21,21 @@ const sourceSerif = Source_Serif_4({
     style: ['normal', 'italic'],
 });
 
-
 export const metadata: Metadata = {
   title: {
     template: '%s | Joaquín González Parada',
     default: 'Joaquín González Parada - Desarrollador Full Stack',
   },
   description: 'Portafolio personal de Joaquín González Parada, mostrando proyectos Full Stack con énfasis en Next.js, React y Appwrite.',
-  viewport: 'width=device-width, initial-scale=1',
 };
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+};
+
+console.log('Metadata object:', metadata);
+console.log('Viewport object:', viewport);
 
 export default function RootLayout({
   children,

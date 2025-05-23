@@ -48,7 +48,11 @@ export default function Home() {
            setErrorFetching(false);
            try {
                 const projects = await getFeaturedProjects(locale);
-                setFeaturedProjects(projects);
+                const normalizedProjects = projects.map(project => ({
+                    ...project,
+                    imageUrl: project.imageUrl && !project.imageUrl.startsWith('/') ? `/${project.imageUrl}` : project.imageUrl
+                }));
+                setFeaturedProjects(normalizedProjects);
            } catch (error) {
                 console.error("Failed to fetch featured projects (client):", error);
                 setErrorFetching(true);
@@ -59,6 +63,7 @@ export default function Home() {
        fetchProjects();
    }, [locale]);
 
+console.log('Featured projects array:', featuredProjects);
 
   return (
     <section className="text-center flex flex-col items-center py-16 md:py-24">
@@ -91,7 +96,10 @@ export default function Home() {
                  <p>Pronto mostraré mis proyectos destacados aquí.</p>
             </div>
       ) : (
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl w-full">
+
+
             {featuredProjects.map((project) => (
               <ProjectCard key={project.slug} {...project} />
             ))}

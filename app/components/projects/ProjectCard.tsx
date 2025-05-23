@@ -31,6 +31,9 @@ export default function ProjectCard({
     const tagsToShow = tags?.slice(0, MAX_TAGS_VISIBLE);
     const remainingTagsCount = tags ? tags.length - MAX_TAGS_VISIBLE : 0;
 
+    // Moved console.log outside of JSX
+    console.log('Image src:', imageUrl);
+
     return (
         // Añadido 'relative' para posicionar el badge de 'isFeatured'
         <article className="group relative flex flex-col overflow-hidden rounded-lg border border-[var(--border-primary)] bg-[var(--bg-subtle)] shadow-[var(--shadow)] transition-all duration-300 ease-in-out hover:shadow-[var(--shadow-lg)] hover:-translate-y-1 focus-within:shadow-[var(--shadow-lg)] focus-within:-translate-y-1">
