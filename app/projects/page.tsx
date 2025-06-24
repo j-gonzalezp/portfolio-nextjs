@@ -3,6 +3,7 @@ import ProjectCard from '@/app/components/projects/ProjectCard';
 import { getAllProjectMetadata } from '@/lib/projects';
 import { translations } from '@/lib/translations';
 import type { ProjectMetadata } from '@/lib/projects';
+import { headers } from 'next/headers';
 
 async function ProjectLists({ locale }: { locale: 'es' | 'en' }) {
     let allProjects: ProjectMetadata[] = [];
@@ -17,7 +18,7 @@ async function ProjectLists({ locale }: { locale: 'es' | 'en' }) {
     }
 
     if (errorFetching) {
-        return <p className="text-[var(--color-danger-fixed)] italic text-center py-8">Error al cargar los proyectos.</p>;
+        return <p className="text-[var(--color-danger-fixed)] italic text-center py-8">{dict.projectsErrorLoading}</p>;
     }
 
     const personalProjects = allProjects.filter(p => !p.isAcademic);
@@ -34,7 +35,7 @@ async function ProjectLists({ locale }: { locale: 'es' | 'en' }) {
                         ))}
                     </div>
                 ) : (
-                    <p className="text-[var(--text-subtle)] italic text-center py-8">Actualmente desarrollando proyectos personales.</p>
+                    <p className="text-[var(--text-subtle)] italic text-center py-8">{dict.projectsNoPersonal}</p>
                 )}
             </div>
 
@@ -47,7 +48,7 @@ async function ProjectLists({ locale }: { locale: 'es' | 'en' }) {
                         ))}
                     </div>
                 ) : (
-                    <p className="text-[var(--text-subtle)] italic text-center py-8">No hay proyectos académicos listados.</p>
+                    <p className="text-[var(--text-subtle)] italic text-center py-8">{dict.projectsNoAcademic}</p>
                 )}
             </div>
         </>
@@ -80,8 +81,11 @@ function PageLoadingSkeleton() {
 
 
 export default async function ProjectsPage() {
-  const serverLocale = 'es';
-  const dict = translations[serverLocale];
+  const headersList = await headers();
+  const acceptLanguage = headersList.get('Accept-Language') || 'es';
+  const detectedLocale = acceptLanguage.includes('en') ? 'en' : 'es';
+
+  const dict = translations[detectedLocale];
 
   return (
     <section className="space-y-16">
@@ -89,7 +93,7 @@ export default async function ProjectsPage() {
 
        <Suspense fallback={<PageLoadingSkeleton />}>
         
-         <ProjectLists locale={serverLocale} />
+         <ProjectLists locale={detectedLocale} />
        </Suspense>
 
     </section>

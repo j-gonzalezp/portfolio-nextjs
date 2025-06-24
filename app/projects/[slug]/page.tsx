@@ -33,17 +33,19 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
   const resolvedSearchParams = searchParams ? await searchParams : {}; // Esperar y manejar undefined
   // --- FIN AWAIT ---
 
+
   // Usar resolvedSearchParams para obtener locale
   const locale: Locale =
     resolvedSearchParams?.locale === 'en' || resolvedSearchParams?.locale === 'es'
       ? resolvedSearchParams.locale as Locale // Asegurar tipo Locale
       : 'es';
+const currentDict = translations[locale];
 
   // Usar resolvedParams.slug
   const projectData: ProjectData | null = await getProjectData(resolvedParams.slug, locale);
 
   if (!projectData) {
-    return { title: 'Proyecto no encontrado' };
+    return { title: currentDict.projectDetailClient.projectNotFound };
   }
 
   const imageUrlAbsolute = projectData.imageUrl

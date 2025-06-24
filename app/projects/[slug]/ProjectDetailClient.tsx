@@ -44,7 +44,7 @@ export default function ProjectDetailClient({ initialProjectData }: ProjectDetai
 
         } catch (error) {
             console.error(`Error fetching project data for locale ${newLocale}:`, error);
-            setErrorLoadingLocale(`No se pudieron cargar los datos para ${newLocale === 'es' ? 'Español' : 'Inglés'}. Mostrando versión anterior.`);
+            setErrorLoadingLocale(currentDict.projectDetailClient.errorLoadingData(newLocale === 'es' ? 'Español' : 'Inglés'));
         } finally {
             setIsLoadingLocale(false);
         }
@@ -78,10 +78,10 @@ export default function ProjectDetailClient({ initialProjectData }: ProjectDetai
   const currentDict = translations[locale];
 
   if (!project && !isLoadingLocale) {
-      return <div className="text-center py-20 text-[var(--text-error)] font-semibold flex flex-col items-center gap-3"><AlertTriangle size={32}/>Error: Datos del proyecto no disponibles.</div>;
+      return <div className="text-center py-20 text-[var(--text-error)] font-semibold flex flex-col items-center gap-3"><AlertTriangle size={32}/>{currentDict.projectDetailClient.errorProjectDataNotAvailable}</div>;
   }
     if (!project && isLoadingLocale) {
-     return <div className="flex flex-col items-center justify-center min-h-[400px] text-[var(--text-subtle)]"><LoadingSpinner /><p className="mt-4">Cargando proyecto...</p></div>;
+     return <div className="flex flex-col items-center justify-center min-h-[400px] text-[var(--text-subtle)]"><LoadingSpinner /><p className="mt-4">{currentDict.projectDetailClient.loadingProject}</p></div>;
   }
   if (!project) return null;
 
@@ -91,7 +91,7 @@ export default function ProjectDetailClient({ initialProjectData }: ProjectDetai
     <article className="max-w-4xl mx-auto relative">
        {isLoadingLocale && (
            <div className="absolute top-4 right-4 z-10 bg-[var(--bg-subtle)] text-[var(--text-subtle)] p-2 rounded-md shadow-md text-xs flex items-center gap-2 animate-pulse">
-               <LoadingSpinner /> Cargando {locale === 'es' ? 'Español' : 'English'}...
+               <LoadingSpinner /> {currentDict.projectDetailClient.loadingLocale(locale === 'es' ? 'Español' : 'English')}
            </div>
        )}
        {errorLoadingLocale && (
@@ -110,7 +110,7 @@ export default function ProjectDetailClient({ initialProjectData }: ProjectDetai
        {!isAcademic && (stories || localizedChangelog || currentFocus) && (
          <section aria-labelledby="dev-progress-heading" className="my-12 md:my-16">
            <SectionTitle id="dev-progress-heading" className="text-3xl">
-               {locale === 'es' ? 'Progreso del Desarrollo' : 'Development Progress'}
+               {currentDict.projectDetailClient.developmentProgress}
            </SectionTitle>
            <AgileProgressDisplay
                currentFocus={currentFocus}

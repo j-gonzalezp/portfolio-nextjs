@@ -1,0 +1,35 @@
+{
+  "slug": "portfolio-nextjs-app",
+  "tags": [
+    "Next.js",
+    "React",
+    "TypeScript",
+    "Tailwind CSS",
+    "App Router",
+    "Server Components",
+    "Docker",
+    "GitHub Actions",
+    "Vercel",
+    "i18n",
+    "Theming",
+    "Accessibility",
+    "Responsive Design"
+  ],
+  "imageUrl": "/images/portfolio.png",
+  "isAcademic": false,
+  "isFeatured": true,
+  "repoUrl": "https://github.com/j-gonzalezp/portfolio-nextjs",
+  "liveUrl": "https://portfolio-nextjs-six-vert.vercel.app/",
+  "translations": {
+    "es": {
+      "title": "Portafolio Personal (Next.js)",
+      "summary": "Este mismo portafolio, reconstruido con Next.js 14 (App Router), TypeScript, Tailwind CSS y desplegado vía Docker en Vercel.",
+      "content": "<p>Esta es la web que estás viendo ahora mismo. Fue desarrollada desde cero utilizando las últimas características de <strong>Next.js (App Router)</strong>, con un fuerte énfasis en <strong>Server Components</strong> para optimizar el rendimiento y reducir el JavaScript del lado del cliente.</p><p>Características clave:</p><ul><li>Stack moderno: <strong>Next.js 14+, React 19, TypeScript</strong>.</li><li>Estilado con <strong>Tailwind CSS</strong> y variables CSS semánticas para theming (Claro/Oscuro/Sistema).</li><li>Estructura basada en el <strong>App Router</strong> de Next.js.</li><li>Internacionalización (i18n) básica (ES/EN) mediante Context API.</li><li>Diseño responsive y foco en <strong>accesibilidad</strong> (semántica HTML, ARIA, navegación por teclado).</li><li>Construcción y despliegue automatizado con <strong>Docker</strong>, <strong>GitHub Actions</strong> (publicando en GHCR) y <strong>Vercel</strong>.</li><li>Configuración para salida <strong>standalone</strong> de Next.js para imágenes Docker optimizadas.</li></ul><p>El proceso de desarrollo incluyó una refactorización significativa basada en un análisis crítico (¡como el que hicimos!) para mejorar la estructura del código, el rendimiento y la experiencia de usuario, aplicando patrones y prácticas modernas.</p>"
+    },
+    "en": {
+      "title": "Personal Portfolio (Next.js)",
+      "summary": "This very portfolio, rebuilt using Next.js 14 (App Router), TypeScript, Tailwind CSS, and deployed via Docker on Vercel.",
+      "content": "<p>This is the website you are currently viewing. It was developed from scratch using the latest features of <strong>Next.js (App Router)</strong>, with a strong emphasis on <strong>Server Components</strong> to optimize performance and reduce client-side JavaScript.</p><p>Key features:</p><ul><li>Modern stack: <strong>Next.js 14+, React 19, TypeScript</strong>.</li><li>Styling with <strong>Tailwind CSS</strong> and semantic CSS variables for theming (Light/Dark/System).</li><li>Architecture based on Next.js <strong>App Router</strong>.</li><li>Basic internationalization (i18n) (ES/EN) using Context API.</li><li>Responsive design with a focus on <strong>accessibility</strong> (semantic HTML, ARIA, keyboard navigation).</li><li>Automated build and deployment pipeline using <strong>Docker</strong>, <strong>GitHub Actions</strong> (publishing to GHCR), and <strong>Vercel</strong>.</li><li>Configuration for Next.js <strong>standalone</strong> output for optimized Docker images.</li></ul><p>The development process included significant refactoring based on critical analysis (like the one we did!) to improve code structure, performance, and user experience, applying modern patterns and practices.</p>"
+    }
+  }
+}

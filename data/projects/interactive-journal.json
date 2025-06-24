@@ -1,0 +1,43 @@
+{
+  "slug": "interactive-journal",
+  "tags": ["Next.js", "Appwrite", "AI", "Tailwind", "TypeScript", "Vercel"],
+  "imageUrl": "/images/hospital.png",
+  "isFeatured": true,
+  "isAcademic": false,
+  "repoUrl": "https://github.com/TU_USUARIO_GITHUB/interactive-journal",
+  "liveUrl": null,
+  "translations": {
+    "es": {
+      "title": "Diario Interactivo con Asistencia AI",
+      "summary": "Un diario inteligente diseñado para personas con TDAH u otras dificultades de organización, potenciado por IA y Appwrite.",
+      "content": "<p>Concepto de proyecto personal enfocado en crear un diario digital que no solo almacene entradas, sino que utilice IA (probablemente APIs externas como OpenAI) para ofrecer resúmenes, identificar patrones o sugerir reflexiones. <strong>El backend se construirá con Appwrite</strong> para manejar usuarios, entradas de diario y posiblemente funciones cloud para interactuar con la IA. Frontend con Next.js.</p>",
+      "progress": {
+        "currentFocus": "Diseño de modelo de datos y UI principal.",
+        "stories": [
+          { "id": "IJ-001", "title": "Create/Edit Journal Entries", "asA": "User", "iWant": "to write and save my daily thoughts", "soThat": "I can keep a personal record", "status": "Planned", "tags": ["Core Feature", "Frontend", "Appwrite DB"] },
+          { "id": "IJ-002", "title": "Secure Authentication", "asA": "User", "iWant": "to access my journal securely", "soThat": "my private information is protected", "status": "Planned", "tags": ["Appwrite Auth", "Security"] },
+          { "id": "IJ-003", "title": "External AI API Integration (Mock)", "asA": "Developer", "iWant": "to define how to interact with an AI API (initially mocked)", "soThat": "the assistant feature can be planned", "status": "Backlog", "tags": ["AI", "API", "Backend"] }
+        ],
+        "changelog": [
+          { "date": "2024-07-10", "description": "Definición inicial del concepto y stack tecnológico." }
+        ]
+      }
+    },
+    "en": {
+      "title": "Interactive Journal with AI Assistance",
+      "summary": "A smart journal designed for people with ADHD or other organizational difficulties, powered by AI and Appwrite.",
+      "content": "<p>Personal project concept focused on creating a digital journal that not only stores entries but also uses AI (likely external APIs like OpenAI) to offer summaries, identify patterns, or suggest reflections. <strong>The backend will be built with Appwrite</strong> to handle users, journal entries, and possibly cloud functions to interact with the AI. Frontend with Next.js.</p>",
+      "progress": {
+        "currentFocus": "Designing data model and main UI.",
+        "stories": [
+          { "id": "IJ-001", "title": "Create/Edit Journal Entries", "asA": "User", "iWant": "to write and save my daily thoughts", "soThat": "I can keep a personal record", "status": "Planned", "tags": ["Core Feature", "Frontend", "Appwrite DB"] },
+          { "id": "IJ-002", "title": "Secure Authentication", "asA": "User", "iWant": "to access my journal securely", "soThat": "my private information is protected", "status": "Planned", "tags": ["Appwrite Auth", "Security"] },
+          { "id": "IJ-003", "title": "External AI API Integration (Mock)", "asA": "Developer", "iWant": "to define how to interact with an AI API (initially mocked)", "soThat": "the assistant feature can be planned", "status": "Backlog", "tags": ["AI", "API", "Backend"] }
+        ],
+        "changelog": [
+          { "date": "2024-07-10", "description": "Initial concept definition and tech stack selection." }
+        ]
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-export const GITHUB_PROFILE_URL = "https://github.com/joagonzalezp";
+export const GITHUB_PROFILE_URL = "https://github.com/j-gonzalezp";
 export const LINKEDIN_PROFILE_URL = "https://linkedin.com/in/joaquin-gonzalez-parada";
 export const PHONE_NUMBER = "+56 9 7892 0114";
 export const PHONE_NUMBER_HREF = "tel:+56978920114";
