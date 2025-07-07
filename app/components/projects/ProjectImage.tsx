@@ -17,7 +17,7 @@ export default function ProjectImage({ imageUrl, title, dict }: ProjectImageProp
                     alt={`${dict.projectImageAltPrefix} ${title}`}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1024px"
-                    className="object-cover transition-opacity duration-500 ease-in-out opacity-0"
+                    className="object-cover object-top transition-opacity duration-500 ease-in-out opacity-0"
                     priority
                     onLoad={event => {
                         const target = event.target as HTMLImageElement;

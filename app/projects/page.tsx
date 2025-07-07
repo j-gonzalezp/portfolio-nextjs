@@ -21,59 +21,29 @@ async function ProjectLists({ locale }: { locale: 'es' | 'en' }) {
         return <p className="text-[var(--color-danger-fixed)] italic text-center py-8">{dict.projectsErrorLoading}</p>;
     }
 
-    const personalProjects = allProjects.filter(p => !p.isAcademic);
-    const academicProjects = allProjects.filter(p => p.isAcademic);
-
     return (
-        <>
-            <div>
-                <h2 className="font-semibold mb-8 border-b border-[var(--border-secondary)] pb-3 text-[var(--text-primary)]">{dict.projectsPersonal}</h2>
-                {personalProjects.length > 0 ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {personalProjects.map((project) => (
-                            <ProjectCard key={project.slug} {...project} />
-                        ))}
-                    </div>
-                ) : (
-                    <p className="text-[var(--text-subtle)] italic text-center py-8">{dict.projectsNoPersonal}</p>
-                )}
-            </div>
-
-            <div>
-                <h2 className="font-semibold mb-8 border-b border-[var(--border-secondary)] pb-3 text-[var(--text-primary)]">{dict.projectsAcademic}</h2>
-                {academicProjects.length > 0 ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {academicProjects.map((project) => (
-                            <ProjectCard key={project.slug} {...project} />
-                        ))}
-                    </div>
-                ) : (
-                    <p className="text-[var(--text-subtle)] italic text-center py-8">{dict.projectsNoAcademic}</p>
-                )}
-            </div>
-        </>
+        <div>
+            {allProjects.length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {allProjects.map((project) => (
+                        <ProjectCard key={project.slug} {...project} />
+                    ))}
+                </div>
+            ) : (
+                <p className="text-[var(--text-subtle)] italic text-center py-8">{dict.projectsNoProjects}</p>
+            )}
+        </div>
     );
 }
 
 function PageLoadingSkeleton() {
      return (
-        <div className="space-y-16 animate-pulse">
+        <div className="space-y-12 animate-pulse">
              <div className="h-10 bg-[var(--border-secondary)] rounded w-1/3 mx-auto"></div>
-             <div className="space-y-8">
-                 <div className="h-8 bg-[var(--border-secondary)] rounded w-1/2"></div>
-                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                     {[1, 2, 3].map((n) => (
-                         <div key={n} className="border border-[var(--border-primary)] rounded-lg h-72 bg-[var(--bg-subtle)]"></div>
-                     ))}
-                 </div>
-             </div>
-             <div className="space-y-8">
-                 <div className="h-8 bg-[var(--border-secondary)] rounded w-1/2"></div>
-                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                     {[1].map((n) => (
-                         <div key={n} className="border border-[var(--border-primary)] rounded-lg h-72 bg-[var(--bg-subtle)]"></div>
-                     ))}
-                 </div>
+             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                 {[1, 2, 3, 4, 5, 6].map((n) => (
+                     <div key={n} className="border border-[var(--border-primary)] rounded-lg h-72 bg-[var(--bg-subtle)]"></div>
+                 ))}
              </div>
         </div>
      );
