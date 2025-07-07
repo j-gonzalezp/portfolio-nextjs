@@ -5,6 +5,7 @@ import Footer from './components/layout/Footer';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { LocaleProvider } from './contexts/LocaleContext';
 import { Inter, Source_Serif_4 } from 'next/font/google';
+import { getLocale } from './actions';
 
 const inter = Inter({
     subsets: ['latin'],
@@ -34,20 +35,18 @@ export const viewport = {
   initialScale: 1,
 };
 
-console.log('Metadata object:', metadata);
-console.log('Viewport object:', viewport);
-
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const locale = await getLocale();
   return (
-    <html lang="es" suppressHydrationWarning className={`${inter.variable} ${sourceSerif.variable}`}>
+    <html lang={locale} suppressHydrationWarning className={`${inter.variable} ${sourceSerif.variable}`}>
       <body>
         <a href="#main-content" className="skip-link">Saltar al contenido principal</a>
         <ThemeProvider>
-          <LocaleProvider>
+          <LocaleProvider initialLocale={locale}>
             <div className={`min-h-screen flex flex-col font-sans bg-[var(--bg-primary)]`}>
               <Navbar />
               <main id="main-content" className="flex-grow w-full container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 pt-28 md:pt-32">

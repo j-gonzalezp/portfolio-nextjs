@@ -1,7 +1,7 @@
 // app/projects/[slug]/ProjectDetailClient.tsx
 'use client';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useTransition } from 'react';
 import { useLocale } from '@/app/contexts/LocaleContext';
 import { translations } from '@/lib/translations';
 import type { ProjectData } from '@/lib/projects';
@@ -17,6 +17,7 @@ import ProjectContent from '@/app/components/projects/ProjectContent';
 import AgileProgressDisplay from '@/app/components/AgileProgressDisplay';
 import SectionTitle from '@/app/components/layout/SectionTitle';
 import LoadingSpinner from '@/app/components/ui/LoadingSpinner';
+import { getProjectDataAction } from './actions';
 
 interface ProjectDetailClientProps {
   initialProjectData: ProjectData | undefined;
@@ -25,62 +26,35 @@ interface ProjectDetailClientProps {
 export default function ProjectDetailClient({ initialProjectData }: ProjectDetailClientProps) {
   const { locale } = useLocale();
   const [project, setProject] = useState<ProjectData | undefined>(initialProjectData);
-  const [isLoadingLocale, setIsLoadingLocale] = useState<boolean>(false);
+  const [isPending, startTransition] = useTransition();
   const [errorLoadingLocale, setErrorLoadingLocale] = useState<string | null>(null);
 
   useEffect(() => {
-    const detectLocaleFromData = (data: ProjectData): Locale | null => {
-      if (!data?.title) return null;
-      return data.title.includes('Aplicación') || data.summary.includes('Aplicación') ? 'es' : 'en';
-    }
-
     const fetchAndSetProjectData = async (slug: string, newLocale: Locale) => {
-        setIsLoadingLocale(true);
         setErrorLoadingLocale(null);
-        console.log(`Attempting to fetch data for slug: ${slug}, locale: ${newLocale}`);
-        try {
-            await new Promise(resolve => setTimeout(resolve, 750));
-            throw new Error("Client-side locale fetching not implemented");
-
-        } catch (error) {
-            console.error(`Error fetching project data for locale ${newLocale}:`, error);
-            setErrorLoadingLocale(currentDict.projectDetailClient.errorLoadingData(newLocale === 'es' ? 'Español' : 'Inglés'));
-        } finally {
-            setIsLoadingLocale(false);
-        }
+        startTransition(async () => {
+            const result = await getProjectDataAction(slug, newLocale);
+            if (result) {
+                setProject(result);
+            } else {
+                console.error(`Error fetching project data for locale ${newLocale}:`);
+                setErrorLoadingLocale(currentDict.projectDetailClient.errorLoadingData(newLocale === 'es' ? 'Español' : 'Inglés'));
+            }
+        });
     };
 
-    const currentLocaleDetected = project ? detectLocaleFromData(project) : null;
-
-    if(locale === currentLocaleDetected) {
-        // If locale matches current data, clear any previous loading error
-        if (errorLoadingLocale) setErrorLoadingLocale(null);
-        return; // No need to do anything else
-    }
-
-    // Locale has changed AND is different from current data's locale
-    if (project?.slug && !isLoadingLocale) {
-        // Attempt to fetch data for the new locale
+    if (project?.slug && project.locale !== locale && !isPending) {
         fetchAndSetProjectData(project.slug, locale);
     }
-
-    // This part handles setting initial state correctly on first render or if initialData changes
-    // But only if it's different from the current project slug to avoid unnecessary updates
-    if (initialProjectData && project?.slug !== initialProjectData.slug) {
-       setProject(initialProjectData);
-       // Reset error when receiving completely new initial data for a different project
-       setErrorLoadingLocale(null);
-    }
-
-  // Add 'errorLoadingLocale' to the dependency array
-  }, [locale, initialProjectData, project, isLoadingLocale, errorLoadingLocale]); // <--- AÑADIDO AQUÍ
+    
+  }, [locale, project, isPending]);
 
   const currentDict = translations[locale];
 
-  if (!project && !isLoadingLocale) {
+  if (!project && !isPending) {
       return <div className="text-center py-20 text-[var(--text-error)] font-semibold flex flex-col items-center gap-3"><AlertTriangle size={32}/>{currentDict.projectDetailClient.errorProjectDataNotAvailable}</div>;
   }
-    if (!project && isLoadingLocale) {
+    if (!project && isPending) {
      return <div className="flex flex-col items-center justify-center min-h-[400px] text-[var(--text-subtle)]"><LoadingSpinner /><p className="mt-4">{currentDict.projectDetailClient.loadingProject}</p></div>;
   }
   if (!project) return null;
@@ -89,7 +63,7 @@ export default function ProjectDetailClient({ initialProjectData }: ProjectDetai
 
   return (
     <article className="max-w-4xl mx-auto relative">
-       {isLoadingLocale && (
+       {isPending && (
            <div className="absolute top-4 right-4 z-10 bg-[var(--bg-subtle)] text-[var(--text-subtle)] p-2 rounded-md shadow-md text-xs flex items-center gap-2 animate-pulse">
                <LoadingSpinner /> {currentDict.projectDetailClient.loadingLocale(locale === 'es' ? 'Español' : 'English')}
            </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
+import { setLocale as setLocaleAction } from '@/app/actions';
 
 type Locale = 'es' | 'en';
 export type { Locale };
@@ -12,14 +13,14 @@ interface LocaleContextProps {
 
 const LocaleContext = createContext<LocaleContextProps | undefined>(undefined);
 
-const getInitialLocale = (): Locale => {
-    if (typeof window !== 'undefined') {
-    }
-    return 'es';
-};
-
-export const LocaleProvider = ({ children }: { children: ReactNode }) => {
-  const [locale, setLocaleState] = useState<Locale>(getInitialLocale);
+export const LocaleProvider = ({ 
+  children,
+  initialLocale
+}: { 
+  children: ReactNode,
+  initialLocale: Locale
+}) => {
+  const [locale, setLocaleState] = useState<Locale>(initialLocale);
 
   useEffect(() => {
       document.documentElement.lang = locale;
@@ -27,6 +28,7 @@ export const LocaleProvider = ({ children }: { children: ReactNode }) => {
 
   const setLocale = (newLocale: Locale) => {
       setLocaleState(newLocale);
+      setLocaleAction(newLocale);
   };
 
   return (

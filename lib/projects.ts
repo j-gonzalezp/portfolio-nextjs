@@ -1,6 +1,7 @@
 "use server"
 import fs from 'fs/promises';
 import path from 'path';
+import { type Locale } from '@/app/contexts/LocaleContext';
 
 export type StoryStatus = 'Backlog' | 'Planned' | 'In Progress' | 'Done' | 'Blocked';
 
@@ -71,6 +72,7 @@ export interface LocalizedChangelogEntry {
 }
 
 export interface ProjectData extends RawProjectDataBase {
+    locale: Locale;
     title: string;
     summary: string;
     content: string;
@@ -94,7 +96,7 @@ async function getProjectFileContent(slug: string): Promise<RawProjectData | nul
 
 function localizeProjectData<T extends ProjectData | ProjectMetadata>(
     data: RawProjectData,
-    locale: 'es' | 'en'
+    locale: Locale
 ): T {
     const localizedContent = data.translations[locale] || data.translations.es; // Fallback to Spanish
 
@@ -109,6 +111,7 @@ function localizeProjectData<T extends ProjectData | ProjectMetadata>(
         title: localizedContent.title,
         summary: localizedContent.summary,
         content: localizedContent.content,
+        locale: locale,
     };
 
     if (localizedContent.progress) {
@@ -124,7 +127,7 @@ function localizeProjectData<T extends ProjectData | ProjectMetadata>(
     return localized as T;
 }
 
-export async function getAllProjectMetadata(locale: 'es' | 'en'): Promise<ProjectMetadata[]> {
+export async function getAllProjectMetadata(locale: Locale): Promise<ProjectMetadata[]> {
     const files = await fs.readdir(PROJECTS_DIRECTORY);
     const projectSlugs = files.filter(file => file.endsWith('.json')).map(file => file.replace(/\.json$/, ''));
 
@@ -148,12 +151,12 @@ export async function getAllProjectMetadata(locale: 'es' | 'en'): Promise<Projec
     return allProjects;
 }
 
-export async function getFeaturedProjects(locale: 'es' | 'en'): Promise<ProjectMetadata[]> {
+export async function getFeaturedProjects(locale: Locale): Promise<ProjectMetadata[]> {
     const allProjects = await getAllProjectMetadata(locale);
     return allProjects.filter(p => p.isFeatured);
 }
 
-export async function getProjectData(slug: string, locale: 'es' | 'en'): Promise<ProjectData | null> {
+export async function getProjectData(slug: string, locale: Locale): Promise<ProjectData | null> {
     const rawData = await getProjectFileContent(slug);
     if (!rawData) return null;
     return localizeProjectData<ProjectData>(rawData, locale);

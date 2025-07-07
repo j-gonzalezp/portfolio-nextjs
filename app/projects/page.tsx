@@ -1,31 +1,50 @@
-import React, { Suspense } from 'react';
+'use client';
+
+import React, { useState, useEffect, Suspense } from 'react';
 import ProjectCard from '@/app/components/projects/ProjectCard';
 import { getAllProjectMetadata } from '@/lib/projects';
 import { translations } from '@/lib/translations';
 import type { ProjectMetadata } from '@/lib/projects';
-import { headers } from 'next/headers';
+import { useLocale } from '@/app/contexts/LocaleContext';
 
-async function ProjectLists({ locale }: { locale: 'es' | 'en' }) {
-    let allProjects: ProjectMetadata[] = [];
-    let errorFetching = false;
+function ProjectLists() {
+    const { locale } = useLocale();
+    const [projects, setProjects] = useState<ProjectMetadata[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
     const dict = translations[locale];
 
-    try {
-        allProjects = await getAllProjectMetadata(locale);
-    } catch (error) {
-        console.error("Failed to fetch projects on server:", error);
-        errorFetching = true;
+    useEffect(() => {
+        const fetchProjects = async () => {
+            setIsLoading(true);
+            setError(null);
+            try {
+                const fetchedProjects = await getAllProjectMetadata(locale);
+                setProjects(fetchedProjects);
+            } catch (e) {
+                console.error("Failed to fetch projects on client:", e);
+                setError(dict.projectsErrorLoading);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchProjects();
+    }, [locale, dict.projectsErrorLoading]);
+
+    if (isLoading) {
+        return <PageLoadingSkeleton />;
     }
 
-    if (errorFetching) {
-        return <p className="text-[var(--color-danger-fixed)] italic text-center py-8">{dict.projectsErrorLoading}</p>;
+    if (error) {
+        return <p className="text-[var(--color-danger-fixed)] italic text-center py-8">{error}</p>;
     }
 
     return (
         <div>
-            {allProjects.length > 0 ? (
+            {projects.length > 0 ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {allProjects.map((project) => (
+                    {projects.map((project) => (
                         <ProjectCard key={project.slug} {...project} />
                     ))}
                 </div>
@@ -49,23 +68,16 @@ function PageLoadingSkeleton() {
      );
 }
 
-
-export default async function ProjectsPage() {
-  const headersList = await headers();
-  const acceptLanguage = headersList.get('Accept-Language') || 'es';
-  const detectedLocale = acceptLanguage.includes('en') ? 'en' : 'es';
-
-  const dict = translations[detectedLocale];
+export default function ProjectsPage() {
+  const { locale } = useLocale();
+  const dict = translations[locale];
 
   return (
     <section className="space-y-16">
       <h1 className="font-bold text-center mb-12 text-[var(--text-primary)]">{dict.projectsTitle}</h1>
-
-       <Suspense fallback={<PageLoadingSkeleton />}>
-        
-         <ProjectLists locale={detectedLocale} />
-       </Suspense>
-
+      <Suspense fallback={<PageLoadingSkeleton />}>
+        <ProjectLists />
+      </Suspense>
     </section>
   );
 }
