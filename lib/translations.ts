@@ -1,4 +1,4 @@
-// lib/translations.ts
+
 export const translations = {
   es: {
     navHome: 'Inicio',
