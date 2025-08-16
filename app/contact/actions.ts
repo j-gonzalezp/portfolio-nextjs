@@ -1,6 +1,7 @@
 // app/contact/actions.ts
 'use server';
 
+import { Resend } from 'resend';
 import { z } from 'zod';
 
 const ContactFormSchema = z.object({
@@ -39,34 +40,30 @@ export async function submitContactForm(
     };
   }
 
-  // Destructure data *after* validation
   const { name, email, message } = validatedFields.data;
 
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
   try {
-    // Use the validated data (example: logging)
-    console.log('Server Action: Nuevo mensaje recibido:');
-    console.log('Nombre:', name);
-    console.log('Email:', email);
-    console.log('Mensaje:', message);
+    await resend.emails.send({
+      from: 'onboarding@resend.dev',
+      to: 'joaquin.gonzalezparada@gmail.com',
+      subject: `Nuevo mensaje de ${name} (Portafolio)`,
+      html: `
+        <p><strong>Nombre:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Mensaje:</strong></p>
+        <p>${message}</p>
+      `,
+    });
 
-    // Replace console logs with actual email sending / DB saving logic
-    // Example: await sendEmail({ name, email, message });
-
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    const emailSentSuccessfully = true; // Simulate success
-
-    if (emailSentSuccessfully) {
-        return { message: '¡Mensaje enviado con éxito!', status: 'success', errors: null };
-    } else {
-        return { message: 'Hubo un problema al enviar el mensaje.', status: 'error', errors: null };
-    }
-
+    return { message: '¡Mensaje enviado con éxito!', status: 'success', errors: null };
   } catch (error) {
-    console.error('Error en Server Action (submitContactForm):', error);
+    console.error('Error al enviar el email con Resend:', error);
     return {
-        message: 'Ocurrió un error inesperado en el servidor.',
-        status: 'error',
-        errors: null
+      message: 'Hubo un problema al enviar el mensaje. Por favor, inténtalo de nuevo más tarde.',
+      status: 'error',
+      errors: null
     };
   }
 }
