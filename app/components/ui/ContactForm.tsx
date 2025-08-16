@@ -58,8 +58,8 @@ export default function ContactForm() {
                     role="alert"
                     className={`p-4 rounded-md text-sm ${
                         state.status === 'success'
-                        ? 'bg-emerald-50 border border-emerald-200 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200 dark:border-emerald-700'
-                        : 'bg-red-50 border border-red-200 text-red-800 dark:bg-red-900 dark:text-red-200 dark:border-red-700'
+                        ? 'bg-emerald-100 border border-emerald-300 text-emerald-800 dark:bg-emerald-700 dark:text-emerald-100 dark:border-emerald-600'
+                        : 'bg-red-100 border border-red-300 text-red-800 dark:bg-red-700 dark:text-red-100 dark:border-red-600'
                     }`}
                 >
                     {state.status === 'error' && <strong>{dict.contactFormError} </strong>}

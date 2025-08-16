@@ -6,9 +6,10 @@ interface ProjectImageProps {
     imageUrl?: string;
     title: string;
     dict: Translations;
+    objectPosition?: string;
 }
 
-export default function ProjectImage({ imageUrl, title, dict }: ProjectImageProps) {
+export default function ProjectImage({ imageUrl, title, dict, objectPosition = 'object-top' }: ProjectImageProps) {
     return (
         <div className="mb-10 overflow-hidden rounded-lg shadow-[var(--shadow-xl)] aspect-video relative border border-[var(--border-primary)] bg-[var(--bg-skeleton)]">
             {imageUrl && typeof imageUrl === 'string' && imageUrl.trim() !== '' ? (
@@ -17,7 +18,7 @@ export default function ProjectImage({ imageUrl, title, dict }: ProjectImageProp
                     alt={`${dict.projectImageAltPrefix} ${title}`}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1024px"
-                    className="object-cover object-top transition-opacity duration-500 ease-in-out opacity-0"
+                    className={`object-cover ${objectPosition} transition-opacity duration-500 ease-in-out opacity-0`}
                     priority
                     onLoad={event => {
                         const target = event.target as HTMLImageElement;

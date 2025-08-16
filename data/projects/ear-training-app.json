@@ -3,6 +3,7 @@
   "slug": "ear-training-app",
   "tags": ["Next.js", "Appwrite", "Tailwind CSS", "TypeScript", "Tone.js", "React"],
   "imageUrl": "/images/Acomponent.png",
+  "objectPosition": "object-[10%_top]",
   "isFeatured": true,
   "isAcademic": false,
   "liveUrl": "https://melody-trainer.vercel.app/",

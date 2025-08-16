@@ -15,9 +15,13 @@ const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
 
 const getInitialTheme = (): Theme => {
     if (typeof window !== 'undefined') {
-        return (localStorage.getItem('theme') as Theme | null) || 'system';
+        const storedTheme = localStorage.getItem('theme') as Theme | null;
+        if (storedTheme) {
+            return storedTheme;
+        }
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
-    return 'system';
+    return 'light';
 };
 
 const getInitialResolvedTheme = (initialPreference: Theme): 'light' | 'dark' => {

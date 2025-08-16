@@ -6,7 +6,7 @@ import type { Theme } from '@/app/contexts/ThemeContext';
 import React from 'react';
 
 export default function ThemeSwitcher() {
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, resolvedTheme } = useTheme();
   const { locale } = useLocale();
   const dict = translations[locale];
 
@@ -26,7 +26,7 @@ export default function ThemeSwitcher() {
           key={option.value}
           onClick={() => handleThemeChange(option.value)}
           className={`flex items-center justify-center h-7 w-7 sm:w-auto sm:px-3 sm:gap-1.5 rounded-full text-xs font-medium transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-color)] focus-visible:ring-offset-1 focus-visible:ring-offset-[var(--bg-secondary)] ${
-            theme === option.value
+            resolvedTheme === option.value
               ? 'bg-[var(--bg-primary)] text-[var(--text-accent)] shadow-sm'
               : 'text-[var(--text-subtle)] hover:text-[var(--text-primary)]'
           }`}

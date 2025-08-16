@@ -1,15 +1,16 @@
 {
-  "slug": "flextrainer",
+  "slug": "multitraining",
   "tags": ["React", "TypeScript", "Tailwind CSS", "Supabase", "Shadcn/UI"],
-  "imageUrl": "/multitraining_icon.ico",
+  "imageUrl": "/images/mtraining.png",
+  "objectPosition": "object-[10%_top]",
   "isFeatured": true,
   "isAcademic": false,
   "liveUrl": "https://github.com/j-gonzalezp/flextrainer",
   "translations": {
     "es": {
-      "title": "FlexTrainer: Entrenamiento de Fuerza Inteligente",
+      "title": "Multitraining: Entrenamiento de Fuerza Inteligente",
       "summary": "Aplicación web para entrenamiento de fuerza basado en el método Grease the Groove (GTG), ofreciendo micro-entrenamientos adaptables para resultados efectivos.",
-      "content": "<p>FlexTrainer es una aplicación web diseñada para transformar tu enfoque al fitness, haciendo que el entrenamiento de fuerza sea accesible, eficiente y sostenible a través de micro-sesiones basadas en la ciencia del aprendizaje motor.</p><p><strong>Funcionalidades Clave:</strong></p><ul><li><strong>Entrenamiento Adaptativo:</strong> Sesiones cortas y frecuentes que se ajustan a tu nivel y progreso.</li><li><strong>Seguimiento de Progreso:</strong> Registro detallado de tu evolución y logros.</li><li><strong>Método Científico:</strong> Basado en el principio de Grease the Groove para maximizar las ganancias de fuerza.</li><li><strong>Enfoque en la Técnica:</strong> Énfasis en la calidad del movimiento sobre la cantidad.</li></ul><p><strong>Stack Tecnológico:</strong></p><ul><li><strong>Frontend:</strong> React con TypeScript y Vite</li><li><strong>Estilos:</strong> Tailwind CSS con componentes de Shadcn/UI</li><li><strong>Autenticación:</strong> Supabase Auth</li><li><strong>Base de Datos:</strong> Supabase</li><li><strong>Despliegue:</strong> Vercel</li></ul>",
+      "content": "<p>Multitraining es una aplicación web diseñada para transformar tu enfoque al fitness, haciendo que el entrenamiento de fuerza sea accesible, eficiente y sostenible a través de micro-sesiones basadas en la ciencia del aprendizaje motor.</p><p><strong>Funcionalidades Clave:</strong></p><ul><li><strong>Entrenamiento Adaptativo:</strong> Sesiones cortas y frecuentes que se ajustan a tu nivel y progreso.</li><li><strong>Seguimiento de Progreso:</strong> Registro detallado de tu evolución y logros.</li><li><strong>Método Científico:</strong> Basado en el principio de Grease the Groove para maximizar las ganancias de fuerza.</li><li><strong>Enfoque en la Técnica:</strong> Énfasis en la calidad del movimiento sobre la cantidad.</li></ul><p><strong>Stack Tecnológico:</strong></p><ul><li><strong>Frontend:</strong> React con TypeScript y Vite</li><li><strong>Estilos:</strong> Tailwind CSS con componentes de Shadcn/UI</li><li><strong>Autenticación:</strong> Supabase Auth</li><li><strong>Base de Datos:</strong> Supabase</li><li><strong>Despliegue:</strong> Cloudflare</li></ul>",
       "progress": {
         "currentFocus": "Mejora de la experiencia de usuario en el carrusel de información y optimización del rendimiento.",
         "stories": [
@@ -28,9 +29,9 @@
       }
     },
     "en": {
-      "title": "FlexTrainer: Smart Strength Training",
+      "title": "Multitraining: Smart Strength Training",
       "summary": "Web application for strength training based on the Grease the Groove (GTG) method, offering adaptable micro-workouts for effective results.",
-      "content": "<p>FlexTrainer is a web application designed to transform your fitness approach, making strength training accessible, efficient, and sustainable through science-based micro-sessions.</p><p><strong>Key Features:</strong></p><ul><li><strong>Adaptive Training:</strong> Short, frequent sessions tailored to your level and progress.</li><li><strong>Progress Tracking:</strong> Detailed recording of your evolution and achievements.</li><li><strong>Scientific Method:</strong> Based on the Grease the Groove principle to maximize strength gains.</li><li><strong>Technique Focus:</strong> Emphasis on movement quality over quantity.</li></ul><p><strong>Tech Stack:</strong></p><ul><li><strong>Frontend:</strong> React with TypeScript and Vite</li><li><strong>Styling:</strong> Tailwind CSS with Shadcn/UI components</li><li><strong>Authentication:</strong> Supabase Auth</li><li><strong>Database:</strong> Supabase</li><li><strong>Deployment:</strong> Vercel</li></ul>",
+      "content": "<p>Multitraining is a web application designed to transform your fitness approach, making strength training accessible, efficient, and sustainable through science-based micro-sessions.</p><p><strong>Key Features:</strong></p><ul><li><strong>Adaptive Training:</strong> Short, frequent sessions tailored to your level and progress.</li><li><strong>Progress Tracking:</strong> Detailed recording of your evolution and achievements.</li><li><strong>Scientific Method:</strong> Based on the Grease the Groove principle to maximize strength gains.</li><li><strong>Technique Focus:</strong> Emphasis on movement quality over quantity.</li></ul><p><strong>Tech Stack:</strong></p><ul><li><strong>Frontend:</strong> React with TypeScript and Vite</li><li><strong>Styling:</strong> Tailwind CSS with Shadcn/UI components</li><li><strong>Authentication:</strong> Supabase Auth</li><li><strong>Database:</strong> Supabase</li><li><strong>Deployment:</strong> Cloudflare</li></ul>",
       "progress": {
         "currentFocus": "Enhancing user experience in the information carousel and optimizing performance.",
         "stories": [
