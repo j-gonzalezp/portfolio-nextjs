@@ -1,0 +1,49 @@
+
+{
+  "slug": "pokestory",
+  "tags": ["Next.js", "TypeScript", "Tailwind CSS", "Google Gemini", "Framer Motion", "Radix UI"],
+  "imageUrl": "/images/Acomponent.png",
+  "objectPosition": "object-[10%_top]",
+  "isFeatured": true,
+  "isAcademic": false,
+  "repoUrl": "https://github.com/j-gonzalezp/pokestory",
+  "liveUrl": "https://pokestory.vercel.app/",
+  "translations": {
+    "es": {
+      "title": "PokeStory RPG: Aventura Pokémon con IA",
+      "summary": "Un juego de rol de Pokémon basado en la web que utiliza IA para generar narrativas dinámicas y únicas, donde cada decisión del jugador da forma a la historia.",
+      "content": "<p>PokeStory RPG es un innovador juego de aventuras de Pokémon que combina la mecánica de los RPG tradicionales con la narración de vanguardia mediante IA. Los jugadores se embarcan en viajes épicos generados proceduralmente, donde cada decisión influye en el destino de su Pokémon a través de un marco narrativo único.</p><p><strong>Funcionalidades Clave:</strong></p><ul><li><strong>Narrativa Dinámica con IA:</strong> Integración con Google Gemini para generar historias únicas y sensibles al contexto.</li><li><strong>Sistema de RPG Completo:</strong> Adopción de Pokémon, sistema de estadísticas avanzado (HP, moral, experiencia) y desarrollo de rasgos de personalidad.</li><li><strong>Experiencia de Usuario Inmersiva:</strong> Mapa de historia interactivo, efectos de texto cinematográficos y un diseño de interfaz moderno y receptivo.</li><li><strong>Persistencia del Juego:</strong> Guarda tus aventuras, gestiona tu equipo de Pokémon y reanuda las historias en cualquier momento.</li></ul><p><strong>Stack Tecnológico:</strong></p><ul><li><strong>Frontend:</strong> Next.js 15 con App Router, TypeScript, Tailwind CSS</li><li><strong>Integración de IA:</strong> Google Generative AI (Gemini 1.5 Flash)</li><li><strong>Animaciones:</strong> Framer Motion</li><li><strong>Componentes UI:</strong> Biblioteca de componentes personalizados con primitivas de Radix UI</li></ul>",
+      "progress": {
+        "currentFocus": "Actualmente enfocado en mejorar la generación de narrativas y expandir las interacciones de la historia.",
+        "stories": [
+          { "id": "PS-001", "title": "Generación de Historia con IA", "asA": "Jugador", "iWant": "experimentar una historia única en cada partida", "soThat": "la rejugabilidad sea infinita", "status": "Implementado", "tags": ["IA", "Core Feature", "Gemini"] },
+          { "id": "PS-002", "title": "Sistema de Adopción de Pokémon", "asA": "Jugador", "iWant": "elegir y nombrar a mis compañeros Pokémon", "soThat": "pueda formar un vínculo con mi equipo", "status": "Implementado", "tags": ["RPG", "UI/UX"] },
+          { "id": "PS-003", "title": "Mapa de Historia Interactivo", "asA": "Jugador", "iWant": "visualizar mi progreso en la aventura", "soThat": "pueda entender el flujo de la narrativa", "status": "Implementado", "tags": ["UI", "Visualización"] },
+          { "id": "PS-004", "title": "Soporte Multi-idioma", "asA": "Jugador", "iWant": "jugar en mi idioma preferido (inglés o español)", "soThat": "pueda entender completamente la historia", "status": "Implementado", "tags": ["Localización", "UX"] }
+        ],
+        "changelog": [
+          { "date": "2025-10-26", "description": "Proyecto añadido al portafolio." },
+          { "date": "2025-10-20", "description": "Lanzamiento inicial de PokeStory RPG." }
+        ]
+      }
+    },
+    "en": {
+      "title": "PokeStory RPG: AI-Powered Pokémon Adventure",
+      "summary": "A web-based Pokémon role-playing game that uses AI to generate dynamic and unique narratives, where every player decision shapes the story.",
+      "content": "<p>PokeStory RPG is an innovative Pokémon adventure game that combines traditional RPG mechanics with cutting-edge AI storytelling. Players embark on epic, procedurally generated journeys where every decision shapes their Pokémon's destiny through a unique narrative framework.</p><p><strong>Key Features:</strong></p><ul><li><strong>AI-Powered Dynamic Storytelling:</strong> Integration with Google Gemini to generate unique, context-aware narratives.</li><li><strong>Comprehensive RPG System:</strong> Pokémon adoption, advanced stat system (HP, morale, experience), and personality trait development.</li><li><strong>Immersive User Experience:</strong> Interactive story map, cinematic typewriter effects, and a modern, responsive UI design.</li><li><strong>Game Persistence:</strong> Save your adventures, manage your Pokémon team, and resume stories at any point.</li></ul><p><strong>Tech Stack:</strong></p><ul><li><strong>Frontend:</strong> Next.js 15 with App Router, TypeScript, Tailwind CSS</li><li><strong>AI Integration:</strong> Google Generative AI (Gemini 1.5 Flash)</li><li><strong>Animations:</strong> Framer Motion</li><li><strong>UI Components:</strong> Custom component library with Radix UI primitives</li></ul>",
+      "progress": {
+        "currentFocus": "Currently focused on improving narrative generation and expanding story interactions.",
+        "stories": [
+          { "id": "PS-001", "title": "AI Story Generation", "asA": "Player", "iWant": "to experience a unique story every playthrough", "soThat": "replayability is infinite", "status": "Implemented", "tags": ["AI", "Core Feature", "Gemini"] },
+          { "id": "PS-002", "title": "Pokémon Adoption System", "asA": "Player", "iWant": "to choose and name my Pokémon companions", "soThat": "I can form a bond with my team", "status": "Implemented", "tags": ["RPG", "UI/UX"] },
+          { "id": "PS-003", "title": "Interactive Story Map", "asA": "Player", "iWant": "to visualize my progress in the adventure", "soThat": "I can understand the narrative flow", "status": "Implemented", "tags": ["UI", "Visualization"] },
+          { "id": "PS-004", "title": "Multi-language Support", "asA": "Player", "iWant": "to play in my preferred language (English or Spanish)", "soThat": "I can fully understand the story", "status": "Implemented", "tags": ["Localization", "UX"] }
+        ],
+        "changelog": [
+          { "date": "2025-10-26", "description": "Project added to the portfolio." },
+          { "date": "2025-10-20", "description": "Initial release of PokeStory RPG." }
+        ]
+      }
+    }
+  }
+}
