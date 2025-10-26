@@ -1,8 +1,9 @@
+// app/contexts/ThemeContext.tsx
 'use client';
 
 import React, { createContext, useState, useEffect, useContext, ReactNode, useCallback } from 'react';
 
-export type Theme = 'light' | 'dark' | 'system';
+export type Theme = 'light' | 'dark';
 
 interface ThemeContextProps {
   theme: Theme;
@@ -13,16 +14,13 @@ interface ThemeContextProps {
 const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
 
 const getInitialTheme = (): Theme => {
-    if (typeof window !== 'undefined') {
-        return (localStorage.getItem('theme') as Theme | null) || 'system';
-    }
-    return 'system';
+    return 'light';
 };
 
 const getInitialResolvedTheme = (initialPreference: Theme): 'light' | 'dark' => {
      if (typeof window !== 'undefined') {
          if (initialPreference === 'system') {
-             return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+             return 'light';
          }
          return initialPreference;
      }
@@ -43,37 +41,14 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     }, []);
 
     useEffect(() => {
-        let currentTheme: 'light' | 'dark';
-        if (theme === 'system') {
-            if (typeof window !== 'undefined') {
-                 currentTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-            } else {
-                 currentTheme = 'light';
-            }
-        } else {
-            currentTheme = theme;
-        }
+        const currentTheme = theme;
         applyThemeClass(currentTheme);
         if (typeof window !== 'undefined') {
             localStorage.setItem('theme', theme);
         }
     }, [theme, applyThemeClass]);
 
-    useEffect(() => {
-        if (theme !== 'system' || typeof window === 'undefined') {
-            return;
-        }
-        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-        const handleChange = () => {
-            if (localStorage.getItem('theme') === 'system') {
-                applyThemeClass(mediaQuery.matches ? 'dark' : 'light');
-            }
-        };
-        mediaQuery.addEventListener('change', handleChange);
-        return () => {
-            mediaQuery.removeEventListener('change', handleChange);
-        };
-    }, [theme, applyThemeClass]);
+
 
     const setTheme = (newTheme: Theme) => {
         setThemeState(newTheme);
