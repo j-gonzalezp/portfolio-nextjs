@@ -1,8 +1,14 @@
-
 {
   "slug": "pokestory",
-  "tags": ["Next.js", "TypeScript", "Tailwind CSS", "Google Gemini", "Framer Motion", "Radix UI"],
-  "imageUrl": "/images/Acomponent.png",
+  "tags": [
+    "Next.js",
+    "TypeScript",
+    "Tailwind CSS",
+    "Google Gemini",
+    "Framer Motion",
+    "Radix UI"
+  ],
+  "imageUrl": "/images/pokestory.png",
   "objectPosition": "object-[10%_top]",
   "isFeatured": true,
   "isAcademic": false,
@@ -16,14 +22,65 @@
       "progress": {
         "currentFocus": "Actualmente enfocado en mejorar la generación de narrativas y expandir las interacciones de la historia.",
         "stories": [
-          { "id": "PS-001", "title": "Generación de Historia con IA", "asA": "Jugador", "iWant": "experimentar una historia única en cada partida", "soThat": "la rejugabilidad sea infinita", "status": "Implementado", "tags": ["IA", "Core Feature", "Gemini"] },
-          { "id": "PS-002", "title": "Sistema de Adopción de Pokémon", "asA": "Jugador", "iWant": "elegir y nombrar a mis compañeros Pokémon", "soThat": "pueda formar un vínculo con mi equipo", "status": "Implementado", "tags": ["RPG", "UI/UX"] },
-          { "id": "PS-003", "title": "Mapa de Historia Interactivo", "asA": "Jugador", "iWant": "visualizar mi progreso en la aventura", "soThat": "pueda entender el flujo de la narrativa", "status": "Implementado", "tags": ["UI", "Visualización"] },
-          { "id": "PS-004", "title": "Soporte Multi-idioma", "asA": "Jugador", "iWant": "jugar en mi idioma preferido (inglés o español)", "soThat": "pueda entender completamente la historia", "status": "Implementado", "tags": ["Localización", "UX"] }
+          {
+            "id": "PS-001",
+            "title": "Generación de Historia con IA",
+            "asA": "Jugador",
+            "iWant": "experimentar una historia única en cada partida",
+            "soThat": "la rejugabilidad sea infinita",
+            "status": "Implementado",
+            "tags": [
+              "IA",
+              "Core Feature",
+              "Gemini"
+            ]
+          },
+          {
+            "id": "PS-002",
+            "title": "Sistema de Adopción de Pokémon",
+            "asA": "Jugador",
+            "iWant": "elegir y nombrar a mis compañeros Pokémon",
+            "soThat": "pueda formar un vínculo con mi equipo",
+            "status": "Implementado",
+            "tags": [
+              "RPG",
+              "UI/UX"
+            ]
+          },
+          {
+            "id": "PS-003",
+            "title": "Mapa de Historia Interactivo",
+            "asA": "Jugador",
+            "iWant": "visualizar mi progreso en la aventura",
+            "soThat": "pueda entender el flujo de la narrativa",
+            "status": "Implementado",
+            "tags": [
+              "UI",
+              "Visualización"
+            ]
+          },
+          {
+            "id": "PS-004",
+            "title": "Soporte Multi-idioma",
+            "asA": "Jugador",
+            "iWant": "jugar en mi idioma preferido (inglés o español)",
+            "soThat": "pueda entender completamente la historia",
+            "status": "Implementado",
+            "tags": [
+              "Localización",
+              "UX"
+            ]
+          }
         ],
         "changelog": [
-          { "date": "2025-10-26", "description": "Proyecto añadido al portafolio." },
-          { "date": "2025-10-20", "description": "Lanzamiento inicial de PokeStory RPG." }
+          {
+            "date": "2025-10-26",
+            "description": "Proyecto añadido al portafolio."
+          },
+          {
+            "date": "2025-10-20",
+            "description": "Lanzamiento inicial de PokeStory RPG."
+          }
         ]
       }
     },
@@ -34,14 +91,65 @@
       "progress": {
         "currentFocus": "Currently focused on improving narrative generation and expanding story interactions.",
         "stories": [
-          { "id": "PS-001", "title": "AI Story Generation", "asA": "Player", "iWant": "to experience a unique story every playthrough", "soThat": "replayability is infinite", "status": "Implemented", "tags": ["AI", "Core Feature", "Gemini"] },
-          { "id": "PS-002", "title": "Pokémon Adoption System", "asA": "Player", "iWant": "to choose and name my Pokémon companions", "soThat": "I can form a bond with my team", "status": "Implemented", "tags": ["RPG", "UI/UX"] },
-          { "id": "PS-003", "title": "Interactive Story Map", "asA": "Player", "iWant": "to visualize my progress in the adventure", "soThat": "I can understand the narrative flow", "status": "Implemented", "tags": ["UI", "Visualization"] },
-          { "id": "PS-004", "title": "Multi-language Support", "asA": "Player", "iWant": "to play in my preferred language (English or Spanish)", "soThat": "I can fully understand the story", "status": "Implemented", "tags": ["Localization", "UX"] }
+          {
+            "id": "PS-001",
+            "title": "AI Story Generation",
+            "asA": "Player",
+            "iWant": "to experience a unique story every playthrough",
+            "soThat": "replayability is infinite",
+            "status": "Implemented",
+            "tags": [
+              "AI",
+              "Core Feature",
+              "Gemini"
+            ]
+          },
+          {
+            "id": "PS-002",
+            "title": "Pokémon Adoption System",
+            "asA": "Player",
+            "iWant": "to choose and name my Pokémon companions",
+            "soThat": "I can form a bond with my team",
+            "status": "Implemented",
+            "tags": [
+              "RPG",
+              "UI/UX"
+            ]
+          },
+          {
+            "id": "PS-003",
+            "title": "Interactive Story Map",
+            "asA": "Player",
+            "iWant": "to visualize my progress in the adventure",
+            "soThat": "I can understand the narrative flow",
+            "status": "Implemented",
+            "tags": [
+              "UI",
+              "Visualization"
+            ]
+          },
+          {
+            "id": "PS-004",
+            "title": "Multi-language Support",
+            "asA": "Player",
+            "iWant": "to play in my preferred language (English or Spanish)",
+            "soThat": "I can fully understand the story",
+            "status": "Implemented",
+            "tags": [
+              "Localization",
+              "UX"
+            ]
+          }
         ],
         "changelog": [
-          { "date": "2025-10-26", "description": "Project added to the portfolio." },
-          { "date": "2025-10-20", "description": "Initial release of PokeStory RPG." }
+          {
+            "date": "2025-10-26",
+            "description": "Project added to the portfolio."
+          },
+          {
+            "date": "2025-10-20",
+            "description": "Initial release of PokeStory RPG."
+          }
         ]
       }
     }

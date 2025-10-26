@@ -1,0 +1,139 @@
+\documentclass[10pt, a4paper]{article}
+
+% --- PAQUETES ESTÁNDAR ---
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper, margin=0.75in]{geometry}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{fontawesome5} % Paquete para los íconos
+
+% --- COLORES Y LINKS ---
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue!50!black,
+    urlcolor=blue!50!black,
+}
+
+% --- FORMATO DE SECCIONES ---
+\titleformat{\section}
+  {\Large\scshape\raggedright} % Estilo: Letra grande, Small Caps, alineado a la izquierda
+  {}
+  {0em}
+  {}
+  [\titlerule] % Línea horizontal debajo del título
+\titlespacing{\section}{0pt}{1.5ex}{1ex} % Espaciado de las secciones
+
+% --- QUITAMOS LA SANGRÍA DE LOS PÁRRAFOS ---
+\setlength{\parindent}{0pt}
+
+% --- AJUSTE DE INTERLINEADO GENERAL ---
+\linespread{1.1}
+
+%-------------------------------------------------------------------------------
+\begin{document}
+
+% --- ENCABEZADO ---
+\begin{center}
+    {\Huge \scshape Joaquín González Parada}
+    \vspace{1.5mm}
+    
+    \large{Desarrollador Full Stack (React \& Node.js) \quad\textperiodcentered\quad Educador}
+\end{center}
+
+\vspace{2mm}
+
+% --- INFORMACIÓN DE CONTACTO CON ÍCONOS ---
+\begin{center}
+    \small
+    \faPhone* \href{tel:+56978920114}{+56 9 7892 0114} \quad\textbar\quad
+    \faEnvelope* \href{mailto:joaquin.gonzalezparada@gmail.com}{joaquin.gonzalezparada@gmail.com} \quad\textbar\quad
+    \faGlobe* \href{https://portfolio-nextjs-six-vert.vercel.app/}{Portafolio Web} \\
+    \faLinkedin* \href{https://www.linkedin.com/in/joaquín-gonzález-parada-a0921a298/}{LinkedIn} \quad\textbar\quad
+    \faGithub* \href{https://github.com/j-gonzalezp}{GitHub}
+\end{center}
+
+\vspace{-1mm}
+
+% --- SECCIÓN RESUMEN ---
+\section*{Resumen Profesional}
+Desarrollador Full Stack con experiencia en JavaScript, TypeScript, React, React Native, Node.js y AWS. Mi experiencia como Profesor de Matemática me ha dotado de una capacidad analítica avanzada y habilidades de comunicación excepcionales para simplificar problemas complejos. Busco integrarme a un equipo dinámico para construir productos de alto impacto, aplicando mi versatilidad técnica y mi enfoque en la experiencia de usuario para crear soluciones eficientes y escalables.
+
+% --- SECCIÓN HABILIDADES TÉCNICAS ---
+\section*{Habilidades Técnicas}
+\begin{itemize}[leftmargin=*, label={}, itemsep=2pt, topsep=2pt]
+    \item \textbf{Front-End:} React, React Native, Next.js, TypeScript, JavaScript (ES6+), HTML5, CSS3, Tailwind CSS.
+    \item \textbf{Back-End:} Node.js, Express, Python, SQL, APIs RESTful.
+    \item \textbf{Cloud \& DevOps:} AWS, Git, CI/CD (nociones), Docker (nociones).
+    \item \textbf{Bases de Datos:} PostgreSQL, Supabase, Appwrite.
+    \item \textbf{Herramientas:} GitHub, VS Code, Jira, Figma.
+\end{itemize}
+
+% --- SECCIÓN EXPERIENCIA ---
+\section*{Experiencia Profesional}
+\begin{itemize}[leftmargin=*, label={}, itemsep=5pt, topsep=2pt] 
+    \item \textbf{Desarrollador Full Stack (DevOps)} \hfill \textit{Pinflag} \hfill \textbf{Septiembre 2025 - Presente}
+    \vspace{1mm}
+    \begin{itemize}[label=\textendash, leftmargin=*, itemsep=2pt]
+        \item Desarrollo y mantenimiento de aplicaciones web y móviles utilizando \textbf{React}, \textbf{Node.js} y \textbf{TypeScript}.
+        \item Colaboración en la automatización de despliegues (CI/CD) y gestión de infraestructura en la nube (\textbf{AWS}).
+        \item Implementación y consumo de APIs RESTful para asegurar la comunicación entre servicios y el front-end.
+    \end{itemize}
+    
+    \item \textbf{Desarrollador Front-End (React Native)} \hfill \textit{OneApps Solutions Spa} \hfill \textbf{Enero 2025 - Agosto 2025}
+    \vspace{1mm}
+    \begin{itemize}[label=\textendash, leftmargin=*, itemsep=2pt]
+        \item Desarrollo de una aplicación móvil multiplataforma con \textbf{React Native}, optimizando la performance y la UX.
+        \item Implementación de interfaces de usuario interactivas a partir de diseños en Figma.
+        \item Integración con servicios backend mediante APIs RESTful para la gestión de datos en tiempo real.
+    \end{itemize}
+    
+    \item \textbf{Profesor de Matemática} \hfill \textit{I. Agrícola Pascual Baburriza} \hfill \textbf{2024}
+     \vspace{1mm}
+    \begin{itemize}[label=\textendash, leftmargin=*, itemsep=2pt]
+        \item Diseño de planes de clase integrando metodologías activas y recursos tecnológicos para mejorar el aprendizaje.
+        \item Implementación de sistemas de evaluación formativa para el seguimiento del progreso estudiantil.
+    \end{itemize}
+
+    \item \textbf{Profesor de Matemática} \hfill \textit{Colegio Virtual (Remoto)} \hfill \textbf{2023}
+     \vspace{1mm}
+    \begin{itemize}[label=\textendash, leftmargin=*, itemsep=2pt]
+        \item Desarrollo de currículo 100\% virtual, adaptando estrategias didácticas para maximizar la interacción.
+        \item Acompañamiento individualizado a estudiantes, manteniendo una comunicación proactiva con ellos y sus apoderados.
+    \end{itemize}
+
+    \item \textbf{Profesional Docente} \hfill \textit{DUOC UC, Valparaíso} \hfill \textbf{2020 - 2023}
+     \vspace{1mm}
+    \begin{itemize}[label=\textendash, leftmargin=*, itemsep=2pt]
+        \item Diseño e implementación de sistemas de acompañamiento y seguimiento personalizados para estudiantes en situación de vulnerabilidad, mejorando la retención académica.
+        \item Desarrollo de material didáctico y ejecución de tutorías para fortalecer competencias matemáticas clave.
+    \end{itemize}
+\end{itemize}
+
+% --- SECCIÓN PROYECTOS ---
+\section*{Proyectos de Desarrollo Relevantes}
+\begin{itemize}[leftmargin=*, label={}, itemsep=4pt, topsep=2pt] 
+    \item \textbf{PokeStory} (\href{https://pokestory.vercel.app/}{Link al Proyecto}) --- RPG basado en LLM que permite al usuario explorar el mundo Pokémon.
+    \\ \textit{Tecnologías: \textbf{Next.js}, \textbf{Gemini API}, \textbf{TypeScript}.}
+    
+    \item \textbf{Melody Trainer} (\href{https://melody-trainer.vercel.app/}{Link al Proyecto}) --- Aplicación web interactiva para el entrenamiento auditivo de músicos.
+    \\ \textit{Tecnologías: \textbf{Next.js}, \textbf{React}, \textbf{TypeScript}, \textbf{Appwrite}, \textbf{Tailwind CSS}, \textbf{Tone.js}.}
+    
+    \item \textbf{Multitraining} (\href{https://wizard.flextrainer.pages.dev/login}{Link al Proyecto}) --- Generador de rutinas de ejercicio con registro de progreso de usuario.
+    \\ \textit{Tecnologías: \textbf{React}, \textbf{Bootstrap}, \textbf{Supabase}.}
+\end{itemize}
+
+% --- SECCIÓN FORMACIÓN ---
+\section*{Formación Académica}
+\begin{itemize}[leftmargin=*, label=\textbullet, itemsep=3pt, topsep=2pt] 
+    \item \textbf{Bootcamp Full Stack JavaScript}, \textit{Talento Digital}, 2024.
+    \item \textbf{Especialización Front-End}, \textit{Adalid}, 2025.
+    \item \textbf{Estudiante de Ciencia de Datos}, \textit{Actualmente}.
+    \item \textbf{Pedagogía en Matemática}, \textit{Pontificia Universidad Católica de Chile}, Titulado 2019.
+\end{itemize}
+
+% --- SECCIÓN IDIOMAS ---
+\section*{Idiomas}
+\textbf{Español:} Nativo \quad\textbar\quad \textbf{Inglés:} Avanzado (C1), Certificado TOEFL
+
+\end{document}
