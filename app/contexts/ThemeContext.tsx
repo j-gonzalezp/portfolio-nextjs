@@ -6,9 +6,9 @@ import React, { createContext, useState, useEffect, useContext, ReactNode, useCa
 export type Theme = 'light' | 'dark';
 
 interface ThemeContextProps {
-  theme: Theme;
-  setTheme: (theme: Theme) => void;
-  resolvedTheme: 'light' | 'dark';
+    theme: Theme;
+    setTheme: (theme: Theme) => void;
+    resolvedTheme: 'light' | 'dark';
 }
 
 const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
@@ -18,13 +18,10 @@ const getInitialTheme = (): Theme => {
 };
 
 const getInitialResolvedTheme = (initialPreference: Theme): 'light' | 'dark' => {
-     if (typeof window !== 'undefined') {
-         if (initialPreference === 'system') {
-             return 'light';
-         }
-         return initialPreference;
-     }
-     return 'light';
+    if (typeof window !== 'undefined') {
+        return initialPreference;
+    }
+    return 'light';
 }
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
@@ -62,9 +59,9 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
 };
 
 export const useTheme = (): ThemeContextProps => {
-  const context = useContext(ThemeContext);
-  if (!context) {
-    throw new Error('useTheme must be used within a ThemeProvider');
-  }
-  return context;
+    const context = useContext(ThemeContext);
+    if (!context) {
+        throw new Error('useTheme must be used within a ThemeProvider');
+    }
+    return context;
 };

@@ -18,8 +18,9 @@ export default function Navbar() {
          <div className="flex justify-between items-center h-16 md:h-20">
 
             <div className="flex-shrink-0">
-                <Link href="/" className="text-xl font-serif font-bold text-[var(--text-primary)] hover:text-[var(--text-accent)] transition-colors duration-150 unstyled">
-                  Joaquín González Parada
+                <Link href="/" className="text-lg md:text-xl font-serif font-bold text-[var(--text-primary)] hover:text-[var(--text-accent)] transition-colors duration-150 unstyled">
+                  <span className="md:hidden">Joaquín González</span>
+                  <span className="hidden md:inline">Joaquín González Parada</span>
                 </Link>
             </div>
 
